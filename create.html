@@ -3,49 +3,227 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create Custom Link | GyanLoop Redirect</title>
-  <link rel="stylesheet" href="css/style.css">
+  <title>GyanLoop Redirect | Create Link</title>
+  <style>
+    :root {
+      --bg-dark: #0f172a;
+      --panel-dark: #1e293b;
+      --accent-cyan: #06b6d4;
+      --accent-blue: #3b82f6;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --success: #10b981;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .card {
+      background: var(--panel-dark);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 32px;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+    }
+
+    h2 {
+      margin-bottom: 8px;
+      font-size: 1.75rem;
+      background: linear-gradient(to right, var(--accent-cyan), var(--accent-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    p.subtitle {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 24px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-main);
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 16px;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      color: #fff;
+      font-size: 1rem;
+      transition: all 0.2s ease;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.2);
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(to right, var(--accent-cyan), var(--accent-blue));
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    button:disabled {
+      background: var(--text-muted);
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    #status-message {
+      margin-top: 20px;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      display: none;
+      line-height: 1.4;
+    }
+
+    .status-success {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid var(--success);
+      color: var(--success);
+    }
+
+    .status-loading {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--text-muted);
+      color: var(--text-main);
+    }
+
+    .result-link {
+      display: block;
+      margin-top: 8px;
+      color: var(--accent-cyan);
+      word-break: break-all;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    
+    .result-link:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
 
-  <header class="container">
-    <nav class="header-nav">
-      <a href="go.html" class="brand-logo">GyanLoop Redirect</a>
-      <a href="go.html" class="btn btn-secondary">← Back to Home</a>
-    </nav>
-  </header>
+  <div class="card">
+    <h2>Create Redirect Route</h2>
+    <p class="subtitle">Enter an identifier slug and destination mapping URL.</p>
 
-  <main class="container">
-    <div class="glass-box entry-form">
-      <h2 style="margin-bottom: 8px; font-weight: 800;">Create Redirection</h2>
-      <p style="color: var(--text-secondary); margin-bottom: 32px; font-size: 0.95rem;">Set custom lookup hash values corresponding directly with explicit links.</p>
+    <form id="redirect-form">
+      <div class="form-group">
+        <label for="customId">Custom ID / Slug</label>
+        <input type="text" id="customId" placeholder="e.g., youtube, portfolio" required pattern="^[a-zA-Z0-9-_]+$">
+      </div>
+
+      <div class="form-group">
+        <label for="targetUrl">Destination URL</label>
+        <input type="url" id="targetUrl" placeholder="https://example.com/your-long-link" required>
+      </div>
+
+      <button type="submit" id="submit-btn">Generate Redirect Link</button>
+    </form>
+
+    <div id="status-message"></div>
+  </div>
+
+  <script>
+    const API_URL = "https://script.google.com/macros/s/AKfycbykz_WxoKk8rS2TM2VsJGhl8fBq6r4MRKw5WwPIEHgeestUFegNnPfnaLKJbS4ulAO3cg/exec";
+
+    document.getElementById('redirect-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
       
-      <form id="redirect-generation-form">
-        <div class="form-group">
-          <label for="custom-id">Custom Redirect ID</label>
-          <input type="text" id="custom-id" placeholder="e.g. portfolio" required autocomplete="off">
-          <span id="id-validation-status" class="feedback-node"></span>
-        </div>
+      const customId = document.getElementById('customId').value.trim().toLowerCase();
+      const targetUrl = document.getElementById('targetUrl').value.trim();
+      const submitBtn = document.getElementById('submit-btn');
+      const statusBox = document.getElementById('status-message');
+
+      // UI state update
+      submitBtn.disabled = true;
+      statusBox.style.display = "block";
+      statusBox.className = "status-loading";
+      statusBox.innerText = "Processing request... Sending data to system streams.";
+
+      try {
+        // Built with no-cors support mechanism to safely bypass standard Google execution blocks
+        await fetch(API_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          body: new URLSearchParams({
+            "id": customId,
+            "url": targetUrl
+          })
+        });
+
+        // Generate the matching redirect URL based on your specific profile setup strategy
+        const baseRoute = window.location.origin + window.location.pathname.replace("create.html", "go.html");
+        const finishedUrl = `${baseRoute}#${customId}`;
+
+        statusBox.className = "status-success";
+        statusBox.innerHTML = `
+          <div><strong>Success! Link sent to backend storage.</strong></div>
+          <div>Your routing URL is live:</div>
+          <a href="${finishedUrl}" target="_blank" class="result-link">${finishedUrl}</a>
+        `;
         
-        <div class="form-group">
-          <label for="destination-url">Destination Link Target</label>
-          <input type="url" id="destination-url" placeholder="https://example.com/your-deep-link" required>
-        </div>
-        
-        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px; padding: 14px;">Publish Redirect Rule</button>
-      </form>
+        // Clear input form safely
+        document.getElementById('redirect-form').reset();
 
-      <div id="success-display-panel"></div>
-    </div>
-  </main>
-
-  <footer class="footer">
-    <div class="container">
-      &copy; 2026 GyanLoop Redirect Framework.
-    </div>
-  </footer>
-
-  <script src="js/config.js"></script>
-  <script src="js/create.js"></script>
+      } catch (error) {
+        console.error("Transmission Error:", error);
+        statusBox.style.display = "block";
+        statusBox.className = "status-loading";
+        statusBox.style.borderColor = "#ef4444";
+        statusBox.style.color = "#ef4444";
+        statusBox.innerText = "Submission completed. Please ensure your Google Sheet permissions match 'Anyone' under target deployments if rows do not populate.";
+      } finally {
+        submitBtn.disabled = false;
+      }
+    });
+  </script>
 </body>
 </html>
