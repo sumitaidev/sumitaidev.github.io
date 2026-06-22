@@ -3,85 +3,90 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GyanLoop | Processing Redirect...</title>
+  <title>GyanLoop | Processing Routing...</title>
   <style>
     body {
-      background-color: #0f172a;
+      background-color: #090d16;
       color: #f8fafc;
-      font-family: system-ui, sans-serif;
+      font-family: system-ui, -apple-system, sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
       margin: 0;
     }
-    .loader-box {
+    .panel {
       text-align: center;
-      padding: 30px;
-      border-radius: 12px;
-      background: #1e293b;
-      border: 1px solid rgba(255,255,255,0.1);
+      padding: 32px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(20px);
+      max-width: 400px;
+      width: 90%;
     }
     .spinner {
-      border: 4px solid rgba(255, 255, 255, 0.1);
-      width: 36px;
-      height: 36px;
+      border: 3px solid rgba(255, 255, 255, 0.1);
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       border-left-color: #06b6d4;
-      animation: spin 1s linear infinite;
-      margin: 0 auto 15px;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 20px;
     }
     @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    p { color: #94a3b8; font-size: 1rem; }
   </style>
 </head>
 <body>
 
-  <div class="loader-box">
+  <div class="panel">
     <div class="spinner"></div>
-    <p id="msg">Analyzing routing registry...</p>
+    <p id="routing-status">Resolving short link destination...</p>
   </div>
 
   <script>
-    // Paste your exact deployment URL here
+    // Paste your exact deployed Web App URL below
     const API_URL = "https://script.google.com/macros/s/AKfycbykz_WxoKk8rS2TM2VsJGhl8fBq6r4MRKw5WwPIEHgeestUFegNnPfnaLKJbS4ulAO3cg/exec";
 
-    async function executeRedirect() {
-      const hash = window.location.hash.trim().toLowerCase();
-      const msg = document.getElementById("msg");
-
-      if (!hash) {
-        msg.innerText = "No routing key provided. Diverting to home page...";
+    async function processRedirectPipeline() {
+      const statusText = document.getElementById("routing-status");
+      
+      // Captures the hash value (e.g., "#youtube")
+      let currentHash = window.location.hash.trim().toLowerCase();
+      
+      if (!currentHash) {
+        statusText.innerText = "No routing path provided. Returning home...";
         setTimeout(() => { window.location.href = "index.html"; }, 2000);
         return;
       }
 
       try {
-        // Pull routing registry from Google Sheets via doGet endpoint
+        // Fetch database records from Apps Script GET endpoint
         const response = await fetch(API_URL);
         const data = await response.json();
 
         if (data.success && data.links) {
-          // Find matching link entry
-          const match = data.links.find(item => item.id === hash);
+          // Look for an exact match in the sheet entries
+          const match = data.links.find(item => item.id === currentHash);
 
-          if (match) {
-            msg.innerText = "Match found! Redirecting...";
+          if (match && match.url) {
+            statusText.innerText = "Route verified! Redirecting...";
             window.location.href = match.url;
           } else {
-            // No matching ID found in sheet rows
+            // ID was not found in the spreadsheet
             window.location.href = "404.html";
           }
         } else {
           window.location.href = "404.html";
         }
       } catch (error) {
-        console.error("Routing error:", error);
+        console.error("Redirect Error:", error);
         window.location.href = "404.html";
       }
     }
 
-    // Run verification scan immediately on page initialize
-    window.addEventListener("DOMContentLoaded", executeRedirect);
+    window.addEventListener("DOMContentLoaded", processRedirectPipeline);
   </script>
 </body>
 </html>
