@@ -3,51 +3,85 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GyanLoop Redirect | Lightning Fast Link Shortener</title>
-  <link rel="stylesheet" href="css/style.css">
+  <title>GyanLoop | Processing Redirect...</title>
+  <style>
+    body {
+      background-color: #0f172a;
+      color: #f8fafc;
+      font-family: system-ui, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .loader-box {
+      text-align: center;
+      padding: 30px;
+      border-radius: 12px;
+      background: #1e293b;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .spinner {
+      border: 4px solid rgba(255, 255, 255, 0.1);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border-left-color: #06b6d4;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 15px;
+    }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+  </style>
 </head>
 <body>
 
-  <header class="container">
-    <nav class="header-nav">
-      <a href="go.html" class="brand-logo">GyanLoop Redirect</a>
-      <div style="display: flex; gap: 14px;">
-        <a href="admin.html" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.9rem;">Admin</a>
-        <a href="create.html" class="btn btn-primary" style="padding: 8px 16px; font-size: 0.9rem;">Create Link</a>
-      </div>
-    </nav>
-  </header>
+  <div class="loader-box">
+    <div class="spinner"></div>
+    <p id="msg">Analyzing routing registry...</p>
+  </div>
 
-  <main class="container">
-    <section class="hero-block">
-      <h1>Shorten Links. Clear Router Frameworks.</h1>
-      <p>A completely open serverless link redirect ecosystem built completely inside static single-page deployments. Map hash routes natively to any destination url instantly.</p>
-      
-      <div style="margin-bottom: 40px;">
-        <a href="create.html" class="btn btn-primary" style="padding: 16px 36px; font-size: 1.1rem; border-radius: 30px;">Generate Your Custom ID</a>
-      </div>
+  <script>
+    // Paste your exact deployment URL here
+    const API_URL = "https://script.google.com/macros/s/AKfycbykz_WxoKk8rS2TM2VsJGhl8fBq6r4MRKw5WwPIEHgeestUFegNnPfnaLKJbS4ulAO3cg/exec";
 
-      <div class="glass-box" style="padding: 32px; max-width: 700px; margin: 0 auto;">
-        <h3 style="margin-bottom: 16px;">How It Works</h3>
-        <p style="font-size: 1rem; line-height: 1.5; color: var(--text-secondary);">
-          Choose an alphanumeric ID token mapping directly across your user experience funnels. Visitors access clean hash addresses and redirect dynamically via sheets processing streams.
-        </p>
-        <div class="example-rack">
-          <span class="example-tag">yourdomain.com/go.html#youtube</span>
-          <span class="example-tag">yourdomain.com/go.html#linkedin</span>
-          <span class="example-tag">yourdomain.com/go.html#portfolio2026</span>
-        </div>
-      </div>
-    </section>
-  </main>
+    async function executeRedirect() {
+      const hash = window.location.hash.trim().toLowerCase();
+      const msg = document.getElementById("msg");
 
-  <footer class="footer">
-    <div class="container">
-      &copy; 2026 GyanLoop Redirect Framework. Co-existing seamlessly with your profile.
-    </div>
-  </footer>
+      if (!hash) {
+        msg.innerText = "No routing key provided. Diverting to home page...";
+        setTimeout(() => { window.location.href = "index.html"; }, 2000);
+        return;
+      }
 
-  <script src="js/config.js"></script>
-  <script src="js/redirect.js"></script>
+      try {
+        // Pull routing registry from Google Sheets via doGet endpoint
+        const response = await fetch(API_URL);
+        const data = await response.json();
+
+        if (data.success && data.links) {
+          // Find matching link entry
+          const match = data.links.find(item => item.id === hash);
+
+          if (match) {
+            msg.innerText = "Match found! Redirecting...";
+            window.location.href = match.url;
+          } else {
+            // No matching ID found in sheet rows
+            window.location.href = "404.html";
+          }
+        } else {
+          window.location.href = "404.html";
+        }
+      } catch (error) {
+        console.error("Routing error:", error);
+        window.location.href = "404.html";
+      }
+    }
+
+    // Run verification scan immediately on page initialize
+    window.addEventListener("DOMContentLoaded", executeRedirect);
+  </script>
 </body>
 </html>
