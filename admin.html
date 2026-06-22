@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin System Control Panel | GyanLoop Redirect</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="container">
+    <nav class="header-nav">
+      <a href="index.html" class="brand-logo">GyanLoop Panel</a>
+      <a href="index.html" class="btn btn-secondary">Exit Control</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="glass-box admin-view" style="margin-bottom: 60px;">
+      <div class="panel-header">
+        <div>
+          <h2 style="font-weight: 800; margin-bottom: 4px;">Redirection Management Node</h2>
+          <p style="color: var(--text-secondary); font-size: 0.9rem;">Review, modify, filter and delete link mapping lists synchronized from the cloud sheet.</p>
+        </div>
+        <div style="display: flex; gap: 12px; width: 100%; max-width: 500px; justify-content: flex-end;">
+          <input type="text" id="search-box" class="form-group search-field" placeholder="Search link maps..." style="margin-bottom: 0; padding: 10px 14px;">
+          <button id="btn-export" class="btn btn-secondary" style="padding: 10px 20px;">Export CSV</button>
+        </div>
+      </div>
+
+      <div class="data-table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 15%;">Date Created</th>
+              <th style="width: 25%;">Redirection ID</th>
+              <th style="width: 40%;">Destination URL Mapping Target</th>
+              <th style="width: 20%;">Actions Matrix</th>
+            </tr>
+          </thead>
+          <tbody id="table-rows-target">
+            </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <div id="edit-modal-element" class="modal" style="display: none;">
+    <div class="glass-box modal-content">
+      <h3 style="margin-bottom: 16px; font-weight: 800;">Edit Destination Target</h3>
+      <form id="edit-modal-form">
+        <input type="hidden" id="modal-target-id">
+        <div class="form-group">
+          <label>Target Key ID Mapping Reference</label>
+          <input type="text" id="modal-display-id" disabled style="opacity: 0.5; background: rgba(0,0,0,0.5);">
+        </div>
+        <div class="form-group">
+          <label for="modal-update-url">New Destination URL</label>
+          <input type="url" id="modal-update-url" required>
+        </div>
+        <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px;">
+          <button type="button" class="btn btn-secondary" onclick="hideEditModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Rule</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      &copy; 2026 GyanLoop Redirect Framework.
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
