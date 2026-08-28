@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sumit Haldar - AI & Data Science Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #f7f6f0;
+            --black: #111111;
+            --green: #ccff00;
+            --red: #ff4d4d;
+            --blue: #4d94ff;
+            --white: #ffffff;
+            --border-width: 3px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Space Grotesk', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: radial-gradient(#d1d1d1 1.5px, transparent 1.5px);
+            background-size: 30px 30px;
+            color: var(--black);
+            overflow-x: hidden;
+        }
+
+        /* Reusable Neo-Brutalist Classes */
+        .brutal-box {
+            border: var(--border-width) solid var(--black);
+            box-shadow: 6px 6px 0 var(--black);
+            background: var(--white);
+            transition: all 0.2s ease-in-out;
+        }
+
+        .brutal-hover:hover {
+            transform: translate(6px, 6px);
+            box-shadow: 0px 0px 0 var(--black);
+        }
+
+        .brutal-btn {
+            padding: 10px 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            border: var(--border-width) solid var(--black);
+            box-shadow: 4px 4px 0 var(--black);
+            transition: all 0.1s ease;
+            text-decoration: none;
+            display: inline-block;
+            color: var(--black);
+        }
+
+        .brutal-btn:active, .brutal-btn:hover {
+            transform: translate(4px, 4px);
+            box-shadow: 0px 0px 0 var(--black);
+        }
+
+        .bg-green { background-color: var(--green) !important; color: var(--black);}
+        .bg-red { background-color: var(--red) !important; color: white;}
+        .bg-blue { background-color: var(--blue) !important; color: white;}
+        .bg-black { background-color: var(--black) !important; color: var(--white);}
+        .bg-white { background-color: var(--white) !important; }
+
+        .tag {
+            padding: 4px 10px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            border: 2px solid var(--black);
+            box-shadow: 2px 2px 0 var(--black);
+            display: inline-block;
+            text-transform: uppercase;
+        }
+
+        /* Layout Constraints */
+        section {
+            padding: 80px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            border-top: 2px dashed rgba(0,0,0,0.2);
+        }
+
+        .section-header { margin-bottom: 40px; }
+        .section-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            border: 2px solid var(--black);
+            background: var(--green);
+            margin-bottom: 15px;
+        }
+        .section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        /* Navigation */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            border-bottom: var(--border-width) solid var(--black);
+            background: var(--bg-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .nav-left { display: flex; align-items: center; gap: 20px; }
+        .logo { font-weight: 800; padding: 8px 12px; font-size: 1.2rem; }
+        .nav-links { display: flex; gap: 20px; list-style: none; font-weight: 700; }
+        .nav-links li a { text-decoration: none; color: var(--black); padding: 5px 10px;}
+        .nav-links li a.active, .nav-links li a:hover { background: var(--green); border: 2px solid var(--black); }
+
+        /* Hero */
+        .hero { display: flex; padding: 60px 5%; min-height: 90vh; border-top: none;}
+        .hero-left { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .hero-title { font-size: 6rem; font-weight: 800; line-height: 0.9; margin: 20px 0; }
+        .hero-subtitle { font-size: 1.5rem; font-weight: 700; margin-bottom: 20px; }
+        .hero-desc { font-size: 1.1rem; max-width: 600px; margin-bottom: 40px; line-height: 1.5;}
+        
+        .hero-right { flex: 1; position: relative; display: flex; justify-content: center; align-items: center; }
+        .center-profile { width: 300px; height: 300px; overflow: hidden; z-index: 2; border-radius: 10px;}
+        .center-profile img { width: 100%; height: 100%; object-fit: cover; }
+        .floating-card { position: absolute; padding: 15px; width: 150px; text-align: center; font-weight: 700; font-size: 0.8rem; z-index: 1; }
+
+        /* About Section */
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .about-img { position: relative; height: 400px; }
+        .about-img img { width: 100%; height: 100%; object-fit: cover; border: var(--border-width) solid var(--black); }
+        .about-overlay { position: absolute; bottom: -20px; right: -20px; padding: 20px; width: 80%; }
+        .about-info-cards { display: flex; flex-direction: column; gap: 20px; justify-content: center;}
+        .info-card { padding: 20px; }
+
+        /* Expertise Grid */
+        .expertise-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .expertise-card { padding: 30px; display: flex; flex-direction: column; gap: 15px; }
+        .expertise-icon { width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; border: 2px solid var(--black); }
+
+        /* Projects */
+        .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .project-card { display: flex; flex-direction: column; }
+        .project-img { height: 200px; border-bottom: var(--border-width) solid var(--black); }
+        .project-img img { width: 100%; height: 100%; object-fit: cover; }
+        .project-content { padding: 20px; display: flex; flex-direction: column; gap: 15px; flex-grow: 1;}
+        .project-tags { display: flex; gap: 10px; flex-wrap: wrap; }
+
+        /* Experience */
+        .exp-list { display: flex; flex-direction: column; gap: 30px; }
+        .exp-card { padding: 30px; position: relative; }
+        .exp-date { position: absolute; top: 30px; right: 30px; }
+        .exp-role { font-size: 1.5rem; font-weight: 800; margin-bottom: 5px; }
+        .exp-company { font-weight: 700; color: #555; margin-bottom: 20px; }
+        .exp-list-items { margin-left: 20px; margin-bottom: 20px; line-height: 1.6; }
+        
+        /* Skills */
+        .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .skill-category { padding: 20px; }
+        .skill-category h3 { margin-bottom: 15px; font-weight: 800; text-transform: uppercase; border-bottom: 2px solid var(--black); padding-bottom: 10px;}
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 10px; }
+
+        /* Contact */
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .contact-info { display: flex; flex-direction: column; gap: 20px; }
+        .contact-box { padding: 20px; display: flex; align-items: center; gap: 15px; font-weight: 700;}
+        .contact-box i { font-size: 1.5rem; }
+        .contact-form { padding: 30px; display: flex; flex-direction: column; gap: 20px; }
+        .form-group { display: flex; flex-direction: column; gap: 10px; font-weight: 700;}
+        .form-group input, .form-group textarea { padding: 15px; border: 2px solid var(--black); background: var(--bg-color); font-size: 1rem; }
+        
+        /* Footer */
+        footer { background: var(--black); color: var(--white); padding: 30px 5%; display: flex; justify-content: space-between; align-items: center; }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .expertise-grid, .projects-grid, .skills-grid { grid-template-columns: repeat(2, 1fr); }
+            .hero-title { font-size: 4rem; }
+        }
+        @media (max-width: 768px) {
+            .expertise-grid, .projects-grid, .skills-grid, .about-grid, .contact-grid { grid-template-columns: 1fr; }
+            .hero { flex-direction: column; text-align: center; }
+            .hero-left { align-items: center; }
+            .hero-right { margin-top: 50px; min-height: 400px; }
+            .nav-links { display: none; }
+            .exp-date { position: static; display: inline-block; margin-bottom: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <div class="logo brutal-box bg-black">SH</div>
+            <span style="font-weight: 800;">SUMIT HALDAR</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home" class="active">HOME</a></li>
+            <li><a href="#about">ABOUT</a></li>
+            <li><a href="#expertise">EXPERTISE</a></li>
+            <li><a href="#projects">PROJECTS</a></li>
+            <li><a href="#experience">EXPERIENCE</a></li>
+        </ul>
+        <div class="nav-right">
+            <a href="#contact" class="brutal-btn bg-white">CONTACT ME</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-left">
+            <div class="tag bg-red" style="margin-bottom: 20px;"><i class="fa-solid fa-circle"></i> OPEN TO ROLES & COLLABORATION</div>
+            <h1 class="hero-title">SUMIT<br>HALDAR</h1>
+            <h2 class="hero-subtitle">AI & DATA SCIENCE STUDENT</h2>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 30px;">
+                <span class="tag bg-white">PYTHON</span>
+                <span class="tag bg-white">DATA ANALYTICS</span>
+                <span class="tag bg-white">AUTOMATION</span>
+            </div>
+            <p class="hero-desc">
+                I build intelligent applications, automation bots, and data-driven web platforms using Python, Pandas, and modern engineering practices. Creator of tech platforms GyanLoop and CSJournal.
+            </p>
+            <div style="display: flex; gap: 15px;">
+                <a href="#projects" class="brutal-btn bg-black">VIEW PROJECTS &rarr;</a>
+                <a href="#" class="brutal-btn bg-green"><i class="fa-solid fa-download"></i> RESUME</a>
+            </div>
+        </div>
+        <div class="hero-right">
+            <div class="center-profile brutal-box">
+                <img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=500&q=80" alt="Profile">
+            </div>
+            <!-- Floating Elements with Hover Effects -->
+            <div class="floating-card brutal-box brutal-hover" style="top: 10%; left: 0; transform: rotate(-5deg);">
+                <div class="tag bg-green" style="margin-bottom:10px;"><i class="fa-solid fa-robot"></i></div><br>AUTOMATION BOTS
+            </div>
+            <div class="floating-card brutal-box brutal-hover" style="top: 20%; right: 0; transform: rotate(5deg);">
+                <div class="tag bg-red" style="margin-bottom:10px;"><i class="fa-solid fa-database"></i></div><br>DATA ANALYTICS
+            </div>
+            <div class="floating-card brutal-box brutal-hover" style="bottom: 10%; left: 10%; transform: rotate(3deg);">
+                <div class="tag bg-blue" style="margin-bottom:10px;"><i class="fa-solid fa-laptop-code"></i></div><br>WEB PLATFORMS
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="section-header">
+            <div class="section-badge">01.</div>
+            <h2 class="section-title">ABOUT ME</h2>
+        </div>
+        <div class="about-grid">
+            <div class="about-img">
+                <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80" alt="Working">
+                <div class="about-overlay brutal-box bg-white brutal-hover">
+                    <p style="font-weight: 600; line-height: 1.5;">I am a B.Tech student specializing in Artificial Intelligence and Data Science at Guru Ghasidas Vishwavidyalaya. I am passionate about bridging the gap between raw data and actionable web applications.</p>
+                </div>
+            </div>
+            <div class="about-info-cards">
+                <div class="info-card brutal-box brutal-hover">
+                    <h3 style="margin-bottom: 10px;">EDUCATION</h3>
+                    <p><strong>B.Tech in AI & Data Science</strong><br>Guru Ghasidas Vishwavidyalaya</p>
+                </div>
+                <div class="info-card brutal-box brutal-hover">
+                    <h3 style="margin-bottom: 10px;">LOCATION</h3>
+                    <p>Chhattisgarh, India</p>
+                </div>
+                <div class="info-card brutal-box brutal-hover bg-green">
+                    <h3 style="margin-bottom: 10px;">PLATFORMS CREATED</h3>
+                    <p>GyanLoop & CSJournal.in</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expertise Section -->
+    <section id="expertise">
+        <div class="section-header">
+            <div class="section-badge">02.</div>
+            <h2 class="section-title">CORE EXPERTISE</h2>
+        </div>
+        <div class="expertise-grid">
+            <div class="expertise-card brutal-box brutal-hover">
+                <div class="expertise-icon bg-green"><i class="fa-brands fa-python"></i></div>
+                <h3>PYTHON PROGRAMMING</h3>
+                <p>Developing robust backend logic, algorithms, and data science life cycles using standard industry libraries.</p>
+            </div>
+            <div class="expertise-card brutal-box brutal-hover">
+                <div class="expertise-icon bg-red"><i class="fa-solid fa-chart-line"></i></div>
+                <h3>DATA ANALYTICS</h3>
+                <p>Leveraging NumPy and Pandas to manipulate, analyze, and extract meaningful patterns from datasets.</p>
+            </div>
+            <div class="expertise-card brutal-box brutal-hover">
+                <div class="expertise-icon bg-blue"><i class="fa-solid fa-code"></i></div>
+                <h3>AUTOMATION BOTS</h3>
+                <p>Scripting functional utility bots like WhatsApp Auto Message systems and hardware integrations like Blink Capture.</p>
+            </div>
+            <div class="expertise-card brutal-box brutal-hover">
+                <div class="expertise-icon bg-white"><i class="fa-solid fa-server"></i></div>
+                <h3>APPS SCRIPT BACKENDS</h3>
+                <p>Building functional live databases and APIs utilizing Google Sheets and Google Apps Script for rapid web apps.</p>
+            </div>
+            <div class="expertise-card brutal-box brutal-hover">
+                <div class="expertise-icon bg-black"><i class="fa-solid fa-newspaper"></i></div>
+                <h3>PLATFORM MANAGEMENT</h3>
+                <p>Developing and managing educational content platforms (GyanLoop) to support tech communities.</p>
+            </div>
+            <div class="expertise-card brutal-box brutal-hover">
+                <div class="expertise-icon bg-green"><i class="fa-solid fa-terminal"></i></div>
+                <h3>C++ & OOPS</h3>
+                <p>Strong fundamental understanding of Object-Oriented Programming, data structures, and algorithms.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="section-header">
+            <div class="section-badge">03.</div>
+            <h2 class="section-title">PROJECTS</h2>
+        </div>
+        <div class="projects-grid">
+            
+            <div class="project-card brutal-box brutal-hover">
+                <div class="project-img">
+                    <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80" alt="Project">
+                </div>
+                <div class="project-content bg-white">
+                    <div class="tag bg-green" style="align-self: flex-start;">PYTHON</div>
+                    <h3>Automation Repository</h3>
+                    <p>A suite of tools including a WhatsApp Auto Message Bot, Blink Photo Capture System, and a Cosmic Wikipedia Search App.</p>
+                    <div class="project-tags">
+                        <span class="tag bg-white">Python</span>
+                        <span class="tag bg-white">APIs</span>
+                    </div>
+                    <a href="#" class="brutal-btn bg-black" style="margin-top: 15px; text-align: center;">GITHUB REPO <i class="fa-brands fa-github"></i></a>
+                </div>
+            </div>
+
+            <div class="project-card brutal-box brutal-hover">
+                <div class="project-img">
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80" alt="Project">
+                </div>
+                <div class="project-content bg-white">
+                    <div class="tag bg-red" style="align-self: flex-start;">FULL STACK</div>
+                    <h3>Newsletter Auth App</h3>
+                    <p>A web application utilizing HTML and Google Apps Script to verify emails with OTP and log entries directly into a spreadsheet database.</p>
+                    <div class="project-tags">
+                        <span class="tag bg-white">HTML/JS</span>
+                        <span class="tag bg-white">Apps Script</span>
+                    </div>
+                    <a href="#" class="brutal-btn bg-black" style="margin-top: 15px; text-align: center;">VIEW LIVE <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="project-card brutal-box brutal-hover">
+                <div class="project-img">
+                    <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=600&q=80" alt="Project">
+                </div>
+                <div class="project-content bg-white">
+                    <div class="tag bg-blue" style="align-self: flex-start;">WEB DEV</div>
+                    <h3>Community Data Forum</h3>
+                    <p>A web-based community forum utilizing Google Sheets as a live backend data source enabling public query posting and nested comments.</p>
+                    <div class="project-tags">
+                        <span class="tag bg-white">Frontend</span>
+                        <span class="tag bg-white">Database</span>
+                    </div>
+                    <a href="#" class="brutal-btn bg-black" style="margin-top: 15px; text-align: center;">VIEW LIVE <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <div class="section-header">
+            <div class="section-badge">04.</div>
+            <h2 class="section-title">EXPERIENCE & INITIATIVES</h2>
+        </div>
+        <div class="exp-list">
+            
+            <div class="exp-card brutal-box brutal-hover">
+                <div class="exp-date tag bg-green">PRESENT</div>
+                <h3 class="exp-role">Founder & Platform Manager</h3>
+                <p class="exp-company">GyanLoop & CSJournal.in</p>
+                <ul class="exp-list-items">
+                    <li>Created and currently manage technical education platforms focused on computer science and AI.</li>
+                    <li>Develop digital educational content, production outlines, and blueprints summarizing professional insights.</li>
+                    <li>Manage web deployment, updates, and community engagement for student learning.</li>
+                </ul>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <span class="tag bg-black">Web Management</span>
+                    <span class="tag bg-black">Content Creation</span>
+                    <span class="tag bg-black">Tech Publishing</span>
+                </div>
+            </div>
+
+            <div class="exp-card brutal-box brutal-hover">
+                <div class="exp-date tag bg-white">APR 2026</div>
+                <h3 class="exp-role">Lead Developer</h3>
+                <p class="exp-company">Attendance Tracking System (Project)</p>
+                <ul class="exp-list-items">
+                    <li>Engineered a location-based and device-restricted attendance tracking application.</li>
+                    <li>Leveraged Google Apps Script capabilities to create a localized platform that strictly validates specific user devices.</li>
+                </ul>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <span class="tag bg-black">Apps Script</span>
+                    <span class="tag bg-black">Validation Logic</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="section-header">
+            <div class="section-badge">05.</div>
+            <h2 class="section-title">TECHNICAL SKILLS</h2>
+        </div>
+        <div class="skills-grid">
+            <div class="skill-category brutal-box brutal-hover">
+                <h3>Languages</h3>
+                <div class="skill-tags">
+                    <span class="tag bg-green">PYTHON</span>
+                    <span class="tag bg-white">C++</span>
+                    <span class="tag bg-white">JAVASCRIPT</span>
+                    <span class="tag bg-white">HTML/CSS</span>
+                </div>
+            </div>
+            <div class="skill-category brutal-box brutal-hover">
+                <h3>Data Science</h3>
+                <div class="skill-tags">
+                    <span class="tag bg-red">PANDAS</span>
+                    <span class="tag bg-red">NUMPY</span>
+                    <span class="tag bg-white">MACHINE LEARNING</span>
+                    <span class="tag bg-white">KAGGLE</span>
+                </div>
+            </div>
+            <div class="skill-category brutal-box brutal-hover">
+                <h3>Tools & Cloud</h3>
+                <div class="skill-tags">
+                    <span class="tag bg-blue">GOOGLE APPS SCRIPT</span>
+                    <span class="tag bg-white">VERCEL</span>
+                    <span class="tag bg-white">GITHUB</span>
+                </div>
+            </div>
+            <div class="skill-category brutal-box brutal-hover">
+                <h3>Core Concepts</h3>
+                <div class="skill-tags">
+                    <span class="tag bg-white">DATA ANALYTICS</span>
+                    <span class="tag bg-white">OOPS</span>
+                    <span class="tag bg-white">BOOLEAN ALGEBRA</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="section-header">
+            <div class="section-badge">06.</div>
+            <h2 class="section-title">LET'S BUILD SOMETHING</h2>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-info">
+                <div class="contact-box brutal-box brutal-hover bg-green">
+                    <i class="fa-solid fa-envelope"></i>
+                    <div>
+                        <p style="font-size: 0.8rem; text-transform: uppercase;">Email Me</p>
+                        <p>hello@sumithaldar.com</p>
+                    </div>
+                </div>
+                <div class="contact-box brutal-box brutal-hover bg-white">
+                    <i class="fa-brands fa-linkedin"></i>
+                    <div>
+                        <p style="font-size: 0.8rem; text-transform: uppercase;">Connect</p>
+                        <p>linkedin.com/in/sumithaldar</p>
+                    </div>
+                </div>
+                <div class="contact-box brutal-box brutal-hover bg-white">
+                    <i class="fa-brands fa-github"></i>
+                    <div>
+                        <p style="font-size: 0.8rem; text-transform: uppercase;">Code</p>
+                        <p>github.com/sumithaldar</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form brutal-box bg-white">
+                <div class="form-group">
+                    <label>NAME</label>
+                    <input type="text" placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label>EMAIL</label>
+                    <input type="email" placeholder="john@example.com">
+                </div>
+                <div class="form-group">
+                    <label>MESSAGE</label>
+                    <textarea rows="4" placeholder="Let's collaborate..."></textarea>
+                </div>
+                <button class="brutal-btn bg-black" style="width: 100%; color: white; margin-top: 10px;">SEND MESSAGE &rarr;</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div style="font-weight: 800;">&copy; 2026 SUMIT HALDAR</div>
+        <div style="display: flex; gap: 15px; font-size: 1.2rem;">
+            <i class="fa-brands fa-github"></i>
+            <i class="fa-brands fa-linkedin"></i>
+            <i class="fa-solid fa-envelope"></i>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
