@@ -1,0 +1,25 @@
+<div class="project-grid">
+    <div class="project-card">
+        <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&q=80" alt="Automation Repository">
+        <div class="project-card-body">
+            <h4>Python Automation Suite</h4>
+            <p>A collection of automated micro-tools including a WhatsApp Auto Messenger, Blink Photo Detection, and Wikipedia search integration.</p>
+        </div>
+    </div>
+
+    <div class="project-card">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80" alt="Attendance Tracker">
+        <div class="project-card-body">
+            <h4>Location & Device Attendance System</h4>
+            <p>Geolocation-restricted attendance tracking application running serverless via Google Apps Script and Sheets API backend.</p>
+        </div>
+    </div>
+
+    <div class="project-card">
+        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80" alt="Newsletter App">
+        <div class="project-card-body">
+            <h4>OTP Newsletter Verification App</h4>
+            <p>Two-step web application using HTML and Apps Script to verify email authenticity via one-time passwords before database entry.</p>
+        </div>
+    </div>
+</div>

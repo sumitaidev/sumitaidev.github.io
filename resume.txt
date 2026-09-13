@@ -1,0 +1,5 @@
+<h3>Education</h3>
+<p><b>Guru Ghasidas Vishwavidyalaya</b><br>
+B.Tech in Artificial Intelligence and Data Science</p>
+<hr>
+<p><i>Full resume download link can be added here using an `<a>` tag.</i></p>

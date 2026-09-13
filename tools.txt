@@ -1,0 +1,7 @@
+<span style="background: #f0f0f0; padding: 5px 10px; border-radius: 12px;">Python</span>
+<span style="background: #f0f0f0; padding: 5px 10px; border-radius: 12px;">NumPy</span>
+<span style="background: #f0f0f0; padding: 5px 10px; border-radius: 12px;">Pandas</span>
+<span style="background: #f0f0f0; padding: 5px 10px; border-radius: 12px;">Google Apps Script</span>
+<span style="background: #f0f0f0; padding: 5px 10px; border-radius: 12px;">HTML/CSS</span>
+<span style="background: #f0f0f0; padding: 5px 10px; border-radius: 12px;">JavaScript</span>
+<span style="background: #f0f0f0; padding: 5px 10px; border-radius: 12px;">Git & GitHub</span>

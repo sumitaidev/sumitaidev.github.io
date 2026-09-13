@@ -1,0 +1,7 @@
+<h3>Core Competencies</h3>
+<ul>
+    <li><b>Programming:</b> Python, C, JavaScript</li>
+    <li><b>Data Science:</b> Managing complete data science lifecycles, statistical analysis, and data manipulation using Pandas and NumPy.</li>
+    <li><b>Content Creation:</b> Structuring educational video scripts and digital content on business, finance, and technology.</li>
+    <li><b>Logic & Circuitry:</b> Boolean algebraic reduction and Karnaugh Maps.</li>
+</ul>
