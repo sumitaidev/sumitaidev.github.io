@@ -1,0 +1,17 @@
+<div class="blog-list">
+    <a href="https://yourbloglink.com/post-1" target="_blank" class="blog-item">
+        <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=300&q=80" alt="Thumbnail" class="blog-thumb">
+        <div class="blog-info">
+            <h4>How to Build an Evaluation Pipeline for AI Models</h4>
+            <p>September 12, 2026</p>
+        </div>
+    </a>
+
+    <a href="https://yourbloglink.com/post-2" target="_blank" class="blog-item">
+        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=300&q=80" alt="Thumbnail" class="blog-thumb">
+        <div class="blog-info">
+            <h4>Data Science Lifecycles: Using Pandas and NumPy effectively</h4>
+            <p>August 28, 2026</p>
+        </div>
+    </a>
+</div>

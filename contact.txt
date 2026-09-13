@@ -1,0 +1,14 @@
+<div style="max-width: 480px; margin: 0 auto; padding: 10px 0;">
+    <h3 style="margin: 0 0 8px 0; font-size: 16px;">Send Me a Message</h3>
+    <p style="margin: 0 0 16px 0; font-size: 13px; color: #8c8c8c;">Have a project, inquiry, or tech question? Drop a line below.</p>
+    
+    <form class="contact-form" action="https://formsubmit.co/hello@sumitaidev.com" method="POST">
+        <!-- Disables captcha redirect page for a cleaner flow -->
+        <input type="hidden" name="_captcha" value="false">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email Address" required>
+        <input type="text" name="_subject" placeholder="Subject">
+        <textarea name="message" placeholder="Write your message here..." required></textarea>
+        <button type="submit"><i class="fa-regular fa-paper-plane"></i> Send Message</button>
+    </form>
+</div>

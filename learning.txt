@@ -1,0 +1,45 @@
+<div class="learning-wrapper">
+    
+    <!-- Left Side: Perfected Circular Progress Arc -->
+    <div class="leet-wrapper">
+        <svg class="leet-svg" viewBox="0 0 100 100">
+            <!-- Cyan left arc -->
+            <path d="M 30 84 A 42 42 0 0 1 14 36" fill="none" stroke="#d5f4f0" stroke-width="4.5" stroke-linecap="round"/>
+            <circle cx="30" cy="84" r="3.5" fill="#00b8a3" />
+            
+            <!-- Yellow top arc -->
+            <path d="M 22 24 A 42 42 0 0 1 78 24" fill="none" stroke="#fff0ce" stroke-width="4.5" stroke-linecap="round"/>
+            
+            <!-- Pink right arc -->
+            <path d="M 86 36 A 42 42 0 0 1 70 84" fill="none" stroke="#fbd5d5" stroke-width="4.5" stroke-linecap="round"/>
+        </svg>
+        <div class="leet-score">20<span>/100</span></div>
+        <div class="leet-solved"><i class="fa-solid fa-check" style="color: #2cb55d;"></i> Solved</div>
+        <div class="leet-attempting">0 Attempting</div>
+    </div>
+
+    <!-- Right Side: Left-to-Right Animated Train Journey -->
+    <div class="train-viewport">
+        <div class="train-track">
+            
+            <div class="train-car">DSA</div>
+            <div class="coupler"></div>
+            
+            <div class="train-car">LLM</div>
+            <div class="coupler"></div>
+            
+            <div class="train-car">RAG</div>
+            <div class="coupler"></div>
+            
+            <div class="train-car">System Design</div>
+            <div class="coupler"></div>
+            
+            <div class="train-car">MCP</div>
+            <div class="coupler"></div>
+            
+            <div class="train-car engine">Topic Learn <i class="fa-solid fa-train" style="margin-left: 6px;"></i></div>
+            
+        </div>
+    </div>
+    
+</div>
