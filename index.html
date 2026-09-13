@@ -191,12 +191,14 @@
             .sidebar { width: 100%; }
             .top-row { flex-direction: column; }
             .bottom-split { flex-direction: column; }
+            
+            /* Ensures tabs cover screen when focused */
+            .feed-column { min-height: 85vh; } 
             .side-column { width: 100%; }
             
-            /* Hide specific elements on mobile */
             .streak-card, #learning-row { display: none !important; }
 
-            /* Bottom Navigation Bar for Mobile */
+            /* Bottom Navigation Bar */
             .tabs {
                 position: fixed;
                 bottom: 0;
@@ -250,14 +252,12 @@
                 <ul class="info-list">
                     <li><i class="fa-solid fa-graduation-cap"></i> Guru Ghasidas Vishwavidyalaya</li>
                     <li><i class="fa-solid fa-code-branch"></i> B.Tech AI & Data Science</li>
-                    <li><i class="fa-brands fa-github"></i> <a href="https://github.com/sumitaidev" target="_blank">sumitaidev</a></li>
-                    <li><i class="fa-brands fa-x-twitter"></i> <a href="https://x.com/sumitaidev" target="_blank">sumitaidev</a></li>
-                    <li><i class="fa-brands fa-linkedin"></i> <a href="https://linkedin.com/in/sumitaidev" target="_blank">sumitaidev</a></li>
+                   
                 </ul>
             </div>
 
-            <!-- Blogs with Toggle feature -->
-            <div class="card">
+            <!-- Blogs with Toggle feature (Anchor point for mobile scroll focus) -->
+            <div class="card" id="blog-scroll-anchor">
                 <div class="section-title blog-toggle" id="blog-toggle">
                     <span>Latest Blogs</span>
                     <i class="fa-solid fa-chevron-up toggle-icon"></i>
@@ -433,16 +433,24 @@
     </div>
 
     <script>
-        // --- Blog Toggle Logic ---
+        // --- Blog Toggle Desktop/Mobile Default Logic ---
         const blogToggle = document.getElementById('blog-toggle');
         const blogWrapper = document.getElementById('sidebar-blogs');
         const toggleIcon = blogToggle.querySelector('.toggle-icon');
 
-        // Automatically close blog dropdown on mobile screens by default
-        if (window.innerWidth <= 992) {
-            blogWrapper.classList.add('closed');
-            toggleIcon.classList.add('closed');
+        function setBlogToggleState() {
+            if (window.innerWidth <= 992) {
+                blogWrapper.classList.add('closed');
+                toggleIcon.classList.add('closed');
+            } else {
+                blogWrapper.classList.remove('closed');
+                toggleIcon.classList.remove('closed');
+            }
         }
+        
+        // Run on load and on screen resize
+        setBlogToggleState();
+        window.addEventListener('resize', setBlogToggleState);
 
         blogToggle.addEventListener('click', () => {
             blogWrapper.classList.toggle('closed');
@@ -504,7 +512,7 @@
             }
         }
 
-        // --- Tab Switching Logic (Includes Focus Scrolling for Mobile) ---
+        // --- Tab Switching & Focus Logic ---
         const tabs = document.querySelectorAll('.tab');
         const contents = document.querySelectorAll('.tab-content');
 
@@ -522,11 +530,10 @@
                 const fileName = e.currentTarget.getAttribute('data-file');
                 if (fileName) fetchTxtFile(fileName, targetId);
                 
-                // When on mobile, scroll view down straight to the feed/content column 
-                // avoiding the profile section at the top
+                // Focus Mobile View on the selected content
                 if (window.innerWidth <= 992) {
-                    const feedColumn = document.querySelector('.feed-column');
-                    feedColumn.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    const scrollAnchor = document.getElementById('blog-scroll-anchor');
+                    scrollAnchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
