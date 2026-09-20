@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>IT Department Chatbot - GGV</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      /* Remove padding on mobile for full-screen feel */
+    }
+
+    .chat-wrapper {
+      width: 100%;
+      max-width: 450px;
+      height: 650px;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Updated Header with Logo and Text */
+    .chat-header {
+      background: #0f172a;
+      color: #ffffff;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 2px solid #2563eb;
+    }
+
+    .header-logo {
+      height: 45px;
+      width: 45px;
+      object-fit: contain;
+      background: white;
+      border-radius: 50%;
+      padding: 2px;
+      flex-shrink: 0;
+    }
+
+    .header-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header-text strong {
+      font-size: 15px;
+      line-height: 1.2;
+      margin-bottom: 3px;
+    }
+
+    .header-text span {
+      font-size: 11px;
+      color: #cbd5e1;
+      line-height: 1.3;
+    }
+
+    .chat-body {
+      flex: 1;
+      padding: 16px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background-color: #f8fafc;
+    }
+
+    .bubble {
+      max-width: 85%;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 14px;
+      line-height: 1.45;
+      word-wrap: break-word;
+      white-space: pre-wrap;
+    }
+
+    .bubble.user {
+      align-self: flex-end;
+      background-color: #2563eb;
+      color: #ffffff;
+      border-bottom-right-radius: 2px;
+    }
+
+    .bubble.bot {
+      align-self: flex-start;
+      background-color: #e2e8f0;
+      color: #1e293b;
+      border-bottom-left-radius: 2px;
+    }
+
+    .bubble.thinking {
+      font-style: italic;
+      color: #64748b;
+      background-color: #e2e8f0;
+    }
+
+    .chat-footer {
+      display: flex;
+      padding: 12px;
+      background: #ffffff;
+      border-top: 1px solid #e2e8f0;
+      gap: 8px;
+    }
+
+    .chat-footer input {
+      flex: 1;
+      padding: 12px 14px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .chat-footer input:focus {
+      border-color: #2563eb;
+    }
+
+    .chat-footer button {
+      background-color: #2563eb;
+      color: #ffffff;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .chat-footer button:hover {
+      background-color: #1d4ed8;
+    }
+
+    /* --- MOBILE RESPONSIVENESS --- */
+    @media (max-width: 480px) {
+      .chat-wrapper {
+        height: 100vh;
+        height: 100dvh; /* Accounts for mobile browser UI bars */
+        max-width: 100%;
+        border-radius: 0;
+      }
+      .header-text strong {
+        font-size: 14px;
+      }
+      .header-text span {
+        font-size: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="chat-wrapper">
+    <!-- Header with GGV Branding -->
+    <div class="chat-header">
+      <img src="https://ggu.ac.in/media/BasePageImage/GGV-logo.png" alt="GGV Logo" class="header-logo" />
+      <div class="header-text">
+        <strong>Department of Information Technology</strong>
+        <span>Guru Ghasidas Vishwavidyalaya, Bilaspur | School of Studies of Engineering and Technology</span>
+      </div>
+    </div>
+
+    <div class="chat-body" id="chatWindow">
+      <div class="bubble bot">Welcome to the IT Department Assistant. How can I help you today?</div>
+    </div>
+
+    <div class="chat-footer">
+      <input type="text" id="userInput" placeholder="Ask about the IT Department..." autocomplete="off" />
+      <button id="sendBtn" onclick="handleSend()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    // --- INSERT YOUR APPS SCRIPT URL HERE ---
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzJh4SwA6d4owUHcFLboVRmW-USU9Aw2vToNRUVqHqel2zYcSmWjIfRq5sFNEPzE6IV8Q/exec";
+
+    const chatWindow = document.getElementById("chatWindow");
+    const userInput = document.getElementById("userInput");
+    const sendBtn = document.getElementById("sendBtn");
+
+    userInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        handleSend();
+      }
+    });
+
+    function appendMessage(text, sender) {
+      const bubble = document.createElement("div");
+      bubble.className = `bubble ${sender}`;
+      bubble.textContent = text;
+      chatWindow.appendChild(bubble);
+      chatWindow.scrollTop = chatWindow.scrollHeight;
+      return bubble;
+    }
+
+    async function handleSend() {
+      const query = userInput.value.trim();
+      if (!query) return;
+
+      appendMessage(query, "user");
+      userInput.value = "";
+      userInput.disabled = true;
+      sendBtn.disabled = true;
+
+      const thinkingBubble = appendMessage("Checking IT Department records...", "thinking");
+
+      try {
+        const response = await fetch(APPS_SCRIPT_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "text/plain;charset=utf-8"
+          },
+          body: JSON.stringify({ message: query })
+        });
+
+        const data = await response.json();
+        chatWindow.removeChild(thinkingBubble);
+        appendMessage(data.reply || "No response received.", "bot");
+
+      } catch (err) {
+        chatWindow.removeChild(thinkingBubble);
+        appendMessage("Network error: Could not reach the server.", "bot");
+        console.error("Fetch Error:", err);
+      } finally {
+        userInput.disabled = false;
+        sendBtn.disabled = false;
+        userInput.focus();
+      }
+    }
+  </script>
+</body>
+</html>
