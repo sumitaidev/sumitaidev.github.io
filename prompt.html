@@ -172,7 +172,7 @@
             padding: 1.8rem 1.8rem 1.8rem 2rem;
             border: 1px solid #e3eaf2;
             font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'JetBrains Mono', monospace;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             line-height: 1.7;
             color: #1b2533;
             white-space: pre-wrap;
@@ -267,7 +267,7 @@
             body { padding: 1.5rem 1rem; }
             .prompt-card { padding: 1.5rem; }
             .header h1 { font-size: 2rem; }
-            .prompt-content { font-size: 0.85rem; padding: 1.2rem; }
+            .prompt-content { font-size: 0.8rem; padding: 1rem; }
             .copy-btn { padding: 0.6rem 1.2rem; }
         }
     </style>
@@ -277,7 +277,7 @@
         <div class="header">
             <div>
                 <h1>
-                    📋 code Library
+                    📋 Prompt Library
                     <span>copy &amp; use</span>
                 </h1>
                 <div class="subhead">production-ready prompts for your workflows</div>
@@ -285,7 +285,7 @@
         </div>
 
         <div class="prompt-grid">
-            <!-- SINGLE PROMPT CARD (the one you requested) -->
+            <!-- SINGLE PROMPT CARD with the full Apps Script code -->
             <div class="prompt-card" id="promptCard">
                 <div class="card-header">
                     <div class="prompt-title">
@@ -296,7 +296,7 @@
                         <svg viewBox="0 0 24 24" width="18" height="18">
                             <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
                         </svg>
-                        <span id="copyBtnText">Copy prompt</span>
+                        <span id="copyBtnText">Copy code</span>
                     </button>
                 </div>
 
@@ -312,35 +312,35 @@
   // Aapka email ID reminder ke liye
   var myEmail = "hello.sumithaldar@gmail.com"; 
   var reminderSubject = "🎉 Birthday Reminder: Time to Gift!";
-  var reminderHtmlBody = "<div style='font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 10px; background-color: #f0f8ff;'>" +
-                 "<div style='text-align: center; margin-bottom: 20px;'>" +
-                 "<h2 style='color: #007bff; font-size: 24px; margin: 0;'>🎂 Today's Birthdays! 🎈</h2>" +
-                 "<p style='color: #555; font-size: 16px;'>Don't forget to order gifts for your friends today.</p>" +
-                 "</div>";
+  var reminderHtmlBody = "&lt;div style='font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 10px; background-color: #f0f8ff;'&gt;" +
+                 "&lt;div style='text-align: center; margin-bottom: 20px;'&gt;" +
+                 "&lt;h2 style='color: #007bff; font-size: 24px; margin: 0;'&gt;🎂 Today's Birthdays! 🎈&lt;/h2&gt;" +
+                 "&lt;p style='color: #555; font-size: 16px;'&gt;Don't forget to order gifts for your friends today.&lt;/p&gt;" +
+                 "&lt;/div&gt;";
                  
   var birthdayFound = false;
   
-  for (var i = 1; i < data.length; i++) {
+  for (var i = 1; i &lt; data.length; i++) {
     var name = data[i][0];
     var bday = new Date(data[i][1]); 
     var location = data[i][2];
     var customLink = data[i][3]; // Link column
     var friendEmail = data[i][4]; // Email column
     
-    if (bday.getMonth() === todayMonth && bday.getDate() === todayDate) {
+    if (bday.getMonth() === todayMonth &amp;&amp; bday.getDate() === todayDate) {
       birthdayFound = true;
       
       // ---------------------------------------------------------
       // 1. DOST KO BIRTHDAY WISH BHEJNA (Agar Email present hai)
       // ---------------------------------------------------------
-      if (friendEmail && friendEmail.trim() !== "") {
+      if (friendEmail &amp;&amp; friendEmail.trim() !== "") {
         var wishSubject = "🎉 Happy Birthday, " + name + "! 🎂";
-        var wishHtmlBody = "<div style='font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 30px; text-align: center; border-radius: 15px; background: linear-gradient(135deg, #f6d365 0%, #fda085 100%); color: #fff;'>" +
-                           "<h1 style='font-size: 36px; margin: 0;'>Happy Birthday!</h1>" +
-                           "<h2 style='font-size: 28px; margin: 10px 0 20px 0;'>" + name + "</h2>" +
-                           "<p style='font-size: 18px; line-height: 1.5;'>Wishing you a fantastic day filled with joy, laughter, and lots of cake! Have a wonderful year ahead.</p>" +
-                           "<div style='font-size: 50px; margin-top: 20px;'>🎉 🎂 🎁</div>" +
-                           "</div>";
+        var wishHtmlBody = "&lt;div style='font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 30px; text-align: center; border-radius: 15px; background: linear-gradient(135deg, #f6d365 0%, #fda085 100%); color: #fff;'&gt;" +
+                           "&lt;h1 style='font-size: 36px; margin: 0;'&gt;Happy Birthday!&lt;/h1&gt;" +
+                           "&lt;h2 style='font-size: 28px; margin: 10px 0 20px 0;'&gt;" + name + "&lt;/h2&gt;" +
+                           "&lt;p style='font-size: 18px; line-height: 1.5;'&gt;Wishing you a fantastic day filled with joy, laughter, and lots of cake! Have a wonderful year ahead.&lt;/p&gt;" +
+                           "&lt;div style='font-size: 50px; margin-top: 20px;'&gt;🎉 🎂 🎁&lt;/div&gt;" +
+                           "&lt;/div&gt;";
                            
         MailApp.sendEmail({
           to: friendEmail,
@@ -357,26 +357,26 @@
       var orderLink = "https://www.amazon.in/s?k=birthday+cake+delivery";
       var buttonColor = "#ff9900"; // Amazon Orange
       
-      if (customLink && customLink.trim() !== "") {
+      if (customLink &amp;&amp; customLink.trim() !== "") {
          orderButtonText = "🛒 Order Now";
          orderLink = customLink;
          buttonColor = "#28a745"; // Green color for custom links
       }
 
-      reminderHtmlBody += "<div style='background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 20px; text-align: center; border-left: 6px solid " + buttonColor + ";'>" +
-                  "<h3 style='margin: 0 0 10px 0; color: #333;'>Friend: <span style='color: " + buttonColor + ";'>" + name + "</span></h3>" +
-                  "<p style='margin: 0 0 15px 0; color: #777;'>📍 Deliver to: <strong>" + location + "</strong></p>" +
+      reminderHtmlBody += "&lt;div style='background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 20px; text-align: center; border-left: 6px solid " + buttonColor + ";'&gt;" +
+                  "&lt;h3 style='margin: 0 0 10px 0; color: #333;'&gt;Friend: &lt;span style='color: " + buttonColor + ";'&gt;" + name + "&lt;/span&gt;&lt;/h3&gt;" +
+                  "&lt;p style='margin: 0 0 15px 0; color: #777;'&gt;📍 Deliver to: &lt;strong&gt;" + location + "&lt;/strong&gt;&lt;/p&gt;" +
                   
                   // Dynamic Order Button
-                  "<a href='" + orderLink + "' style='display: inline-block; background-color: " + buttonColor + "; color: #ffffff; text-decoration: none; padding: 14px 30px; font-size: 18px; font-weight: bold; border-radius: 30px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.2);'>" + orderButtonText + "</a>" +
+                  "&lt;a href='" + orderLink + "' style='display: inline-block; background-color: " + buttonColor + "; color: #ffffff; text-decoration: none; padding: 14px 30px; font-size: 18px; font-weight: bold; border-radius: 30px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.2);'&gt;" + orderButtonText + "&lt;/a&gt;" +
                   
-                  "</div>";
+                  "&lt;/div&gt;";
     }
   }
   
-  reminderHtmlBody += "<div style='text-align: center; color: #999; font-size: 12px; margin-top: 20px;'>" +
-              "<p>Automated by your Google Apps Script.</p>" +
-              "</div></div>";
+  reminderHtmlBody += "&lt;div style='text-align: center; color: #999; font-size: 12px; margin-top: 20px;'&gt;" +
+              "&lt;p&gt;Automated by your Google Apps Script.&lt;/p&gt;" +
+              "&lt;/div&gt;&lt;/div&gt;";
   
   // Agar kisi ka birthday hai, toh aapko final reminder bhej do
   if (birthdayFound) {
@@ -404,7 +404,7 @@
     </div>
 
     <!-- toast feedback -->
-    <div class="toast-message" id="toast">✅ Prompt copied to clipboard!</div>
+    <div class="toast-message" id="toast">✅ Code copied to clipboard!</div>
 
     <script>
         (function() {
@@ -413,15 +413,14 @@
             const promptContent = document.getElementById('promptContent');
             const toast = document.getElementById('toast');
 
-            // get the raw prompt text from the code block (without extra spaces)
+            // get the raw code text from the code block
             function getPromptText() {
-                // using textContent from the code element inside the promptContent
                 const codeElement = promptContent.querySelector('code');
                 return codeElement ? codeElement.textContent : '';
             }
 
             // show temporary toast
-            function showToast(message = '✅ Prompt copied to clipboard!') {
+            function showToast(message = '✅ Code copied to clipboard!') {
                 toast.textContent = message;
                 toast.classList.add('show');
                 setTimeout(() => {
@@ -431,7 +430,6 @@
 
             // copy to clipboard (modern + fallback)
             async function copyToClipboard(text) {
-                // Try navigator.clipboard first (works on https, localhost)
                 if (navigator.clipboard && navigator.clipboard.writeText) {
                     try {
                         await navigator.clipboard.writeText(text);
@@ -472,46 +470,29 @@
             async function handleCopy() {
                 const promptText = getPromptText();
                 if (!promptText || promptText.trim() === '') {
-                    showToast('⚠️ No prompt text found');
+                    showToast('⚠️ No code text found');
                     return;
                 }
 
                 const success = await copyToClipboard(promptText);
 
                 if (success) {
-                    // visual feedback on button
                     copyButton.classList.add('copied');
                     copyBtnText.textContent = 'Copied!';
-                    showToast('✅ Prompt copied to clipboard!');
+                    showToast('✅ Code copied to clipboard!');
 
-                    // reset after 2 sec
                     setTimeout(() => {
                         copyButton.classList.remove('copied');
-                        copyBtnText.textContent = 'Copy prompt';
+                        copyBtnText.textContent = 'Copy code';
                     }, 2000);
                 } else {
                     showToast('❌ Copy failed — please copy manually');
                 }
             }
 
-            // attach event
             copyButton.addEventListener('click', handleCopy);
-
-            // optional: keyboard shortcut Ctrl+Shift+C? not needed.
-            // Also allow copy by clicking on the button area only.
-
-            // for extra reliability, if user clicks on the prompt content itself, we don't copy
-            // but we keep the dedicated button.
-
-            // lazy fix: ensure toast doesn't block clicks
             toast.style.pointerEvents = 'none';
         })();
     </script>
-
-    <!-- 
-        Additional hidden pre element not needed — we use the code block inside .prompt-content 
-        but we keep the exact text without leading spaces for copy cleanliness.
-        The <code> block already has the prompt text. 
-    -->
 </body>
 </html>
