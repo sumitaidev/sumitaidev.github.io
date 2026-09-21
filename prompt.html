@@ -277,7 +277,7 @@
         <div class="header">
             <div>
                 <h1>
-                    📋 Prompt Library
+                    📋 code Library
                     <span>copy &amp; use</span>
                 </h1>
                 <div class="subhead">production-ready prompts for your workflows</div>
@@ -301,21 +301,92 @@
                 </div>
 
                 <div class="prompt-content" id="promptContent">
-                    <code>Create a Google Apps Script to automate birthday wishes and gift reminders based on a Google Sheet.
+                    <code>function sendBirthdayAlerts() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var data = sheet.getDataRange().getValues();
+  
+  var today = new Date();
+  var todayMonth = today.getMonth();
+  var todayDate = today.getDate();
+  
+  // Aapka email ID reminder ke liye
+  var myEmail = "hello.sumithaldar@gmail.com"; 
+  var reminderSubject = "🎉 Birthday Reminder: Time to Gift!";
+  var reminderHtmlBody = "<div style='font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 10px; background-color: #f0f8ff;'>" +
+                 "<div style='text-align: center; margin-bottom: 20px;'>" +
+                 "<h2 style='color: #007bff; font-size: 24px; margin: 0;'>🎂 Today's Birthdays! 🎈</h2>" +
+                 "<p style='color: #555; font-size: 16px;'>Don't forget to order gifts for your friends today.</p>" +
+                 "</div>";
+                 
+  var birthdayFound = false;
+  
+  for (var i = 1; i < data.length; i++) {
+    var name = data[i][0];
+    var bday = new Date(data[i][1]); 
+    var location = data[i][2];
+    var customLink = data[i][3]; // Link column
+    var friendEmail = data[i][4]; // Email column
+    
+    if (bday.getMonth() === todayMonth && bday.getDate() === todayDate) {
+      birthdayFound = true;
+      
+      // ---------------------------------------------------------
+      // 1. DOST KO BIRTHDAY WISH BHEJNA (Agar Email present hai)
+      // ---------------------------------------------------------
+      if (friendEmail && friendEmail.trim() !== "") {
+        var wishSubject = "🎉 Happy Birthday, " + name + "! 🎂";
+        var wishHtmlBody = "<div style='font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 30px; text-align: center; border-radius: 15px; background: linear-gradient(135deg, #f6d365 0%, #fda085 100%); color: #fff;'>" +
+                           "<h1 style='font-size: 36px; margin: 0;'>Happy Birthday!</h1>" +
+                           "<h2 style='font-size: 28px; margin: 10px 0 20px 0;'>" + name + "</h2>" +
+                           "<p style='font-size: 18px; line-height: 1.5;'>Wishing you a fantastic day filled with joy, laughter, and lots of cake! Have a wonderful year ahead.</p>" +
+                           "<div style='font-size: 50px; margin-top: 20px;'>🎉 🎂 🎁</div>" +
+                           "</div>";
+                           
+        MailApp.sendEmail({
+          to: friendEmail,
+          subject: wishSubject,
+          htmlBody: wishHtmlBody
+        });
+      }
+      
+      // ---------------------------------------------------------
+      // 2. AAPKE LIYE REMINDER EMAIL TAIYAR KARNA
+      // ---------------------------------------------------------
+      // Smart Button Logic: Agar custom link hai toh wo use karo, nahi toh Amazon search
+      var orderButtonText = "🎂 Search Cake on Amazon";
+      var orderLink = "https://www.amazon.in/s?k=birthday+cake+delivery";
+      var buttonColor = "#ff9900"; // Amazon Orange
+      
+      if (customLink && customLink.trim() !== "") {
+         orderButtonText = "🛒 Order Now";
+         orderLink = customLink;
+         buttonColor = "#28a745"; // Green color for custom links
+      }
 
-Sheet Columns: Friend's Name, Birthday, Location, Link, Email.
-
-Script Requirements (to run daily):
-
-Check if today's date matches any birthday in the sheet.
-
-To the Friend: If it's their birthday and the 'Email' column is filled, send them a beautiful, HTML-styled Happy Birthday email.
-
-To Me (Reminder): Send an HTML reminder email to my address with the friend's name, location, and a smart action button.
-
-Smart Button Logic: In my reminder email, if the 'Link' column has a URL (like a specific Amazon/Zomato link), create a green '🛒 Order Now' button pointing to it. If the 'Link' column is empty, create an orange '🎂 Search Cake on Amazon' button linking to an Amazon search for cake delivery.
-
-Please provide the complete Apps Script code with modern HTML/CSS styling for both emails, and instructions on how to set up the daily trigger.</code>
+      reminderHtmlBody += "<div style='background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 20px; text-align: center; border-left: 6px solid " + buttonColor + ";'>" +
+                  "<h3 style='margin: 0 0 10px 0; color: #333;'>Friend: <span style='color: " + buttonColor + ";'>" + name + "</span></h3>" +
+                  "<p style='margin: 0 0 15px 0; color: #777;'>📍 Deliver to: <strong>" + location + "</strong></p>" +
+                  
+                  // Dynamic Order Button
+                  "<a href='" + orderLink + "' style='display: inline-block; background-color: " + buttonColor + "; color: #ffffff; text-decoration: none; padding: 14px 30px; font-size: 18px; font-weight: bold; border-radius: 30px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.2);'>" + orderButtonText + "</a>" +
+                  
+                  "</div>";
+    }
+  }
+  
+  reminderHtmlBody += "<div style='text-align: center; color: #999; font-size: 12px; margin-top: 20px;'>" +
+              "<p>Automated by your Google Apps Script.</p>" +
+              "</div></div>";
+  
+  // Agar kisi ka birthday hai, toh aapko final reminder bhej do
+  if (birthdayFound) {
+    MailApp.sendEmail({
+      to: myEmail,
+      subject: reminderSubject,
+      htmlBody: reminderHtmlBody
+    });
+  }
+}</code>
                 </div>
 
                 <div class="meta-note">
