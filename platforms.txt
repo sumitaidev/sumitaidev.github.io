@@ -14,7 +14,7 @@
     </div>
 </a>
 
-<a href="www.sumitaidev.com" class="platform-item">
+<a href="#" class="platform-item">
     <img src="https://i.ibb.co/cSfSWZpy/image.png" class="platform-thumb" alt="portpfolio">
     <div class="platform-info">
         <h4>Sumitaidev.com</h4>
