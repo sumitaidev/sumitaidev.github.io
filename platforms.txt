@@ -1,4 +1,4 @@
-<a href="#" class="platform-item">
+<a href="https://gyanloop.com/" class="platform-item">
     <img src="https://i.ibb.co/TBQBqhbP/image.png" class="platform-thumb" alt="Gyanloop.com">
     <div class="platform-info">
         <h4>Gyanloop Portal</h4>
@@ -6,18 +6,18 @@
     </div>
 </a>
 
-<a href="#" class="platform-item">
-    <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=100&q=80" class="platform-thumb" alt="Attendance App">
+<a href="https://chromewebstore.google.com/detail/capnote-youtube-notebook/emjgmdbagaogmckjdfobfaggdofjfcmp" class="platform-item">
+    <img src="https://i.ibb.co/by7bLSX/image.png" class="platform-thumb" alt="Capnote">
     <div class="platform-info">
-        <h4>Geo-Attendance Portal</h4>
-        <p>Location-restricted check-ins</p>
+        <h4>CapNote chrome Extention</h4>
+        <p>Frist chrome extention </p>
     </div>
 </a>
 
-<a href="#" class="platform-item">
-    <img src="https://images.unsplash.com/photo-1579389083078-4e7018379f7e?w=100&q=80" class="platform-thumb" alt="Verification App">
+<a href="www.sumitaidev.com" class="platform-item">
+    <img src="https://i.ibb.co/cSfSWZpy/image.png" class="platform-thumb" alt="portpfolio">
     <div class="platform-info">
-        <h4>OTP Verification Engine</h4>
-        <p>Automated email subscriber pipeline</p>
+        <h4>Sumitaidev.com</h4>
+        <p>My Portfolio</p>
     </div>
 </a>
