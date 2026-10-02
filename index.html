@@ -111,19 +111,12 @@
 
         /* --- Learning Journey Bar (Middle Row) --- */
         .learning-wrapper { display: flex; gap: 20px; align-items: center; padding: 10px; width: 100%; overflow: hidden; }
-        
-        /* Radar chart container */
-        .radar-wrapper { 
-            position: relative; 
-            width: 220px; 
-            height: 200px; 
-            flex-shrink: 0; 
-            margin-left: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .radar-svg { width: 100%; height: 100%; }
+        .leet-wrapper { position: relative; width: 140px; height: 140px; display: flex; flex-direction: column; justify-content: center; align-items: center; flex-shrink: 0; margin-left: 20px; }
+        .leet-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; transform: scale(1.15); }
+        .leet-score { font-size: 32px; font-weight: 500; color: var(--text-main); line-height: 1; margin-top: -5px; }
+        .leet-score span { font-size: 16px; color: var(--text-muted); }
+        .leet-solved { font-size: 14px; color: var(--text-main); margin-top: 6px; }
+        .leet-attempting { font-size: 13px; color: var(--text-muted); position: absolute; bottom: -8px; }
 
         .train-viewport { flex: 1; overflow: hidden; position: relative; height: 100px; display: flex; align-items: center; border-bottom: 2px solid var(--border-color); margin-left: 20px; }
         .train-track { display: flex; align-items: center; position: absolute; white-space: nowrap; animation: trainMoveLR 14s linear infinite; }
@@ -144,7 +137,21 @@
         .feed-column { flex: 1.6; min-width: 0; width: 100%; }
         .side-column { flex: 1; display: flex; flex-direction: column; gap: 20px; min-width: 280px; width: 100%; }
 
-        .tabs { display: flex; gap: 10px; border-bottom: 1px solid var(--border-color); padding-bottom: 12px; margin-bottom: 16px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        /* Hidden scrollbar on tabs */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
+            margin-bottom: 16px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .tabs::-webkit-scrollbar { display: none; height: 0; width: 0; }
+
         .tab { font-size: 13.5px; color: var(--text-muted); font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 6px; transition: all 0.2s; white-space: nowrap; }
         .tab:hover { background: var(--hover-bg); }
         .tab.active { color: var(--text-main); background: var(--hover-bg); font-weight: 600; }
@@ -204,7 +211,6 @@
             
             .streak-card, #learning-row { display: none !important; }
 
-            /* Bottom Navigation Bar */
             .tabs {
                 position: fixed;
                 bottom: 0;
@@ -220,7 +226,10 @@
                 z-index: 1000;
                 box-shadow: 0 -4px 15px rgba(0,0,0,0.05);
                 border-radius: 0;
+                overflow-x: visible;
+                scrollbar-width: none;
             }
+            .tabs::-webkit-scrollbar { display: none; }
             .tab {
                 flex-direction: column;
                 gap: 4px;
@@ -258,11 +267,10 @@
                 <ul class="info-list">
                     <li><i class="fa-solid fa-graduation-cap"></i> Guru Ghasidas Vishwavidyalaya</li>
                     <li><i class="fa-solid fa-code-branch"></i> B.Tech AI & Data Science</li>
-                   
                 </ul>
             </div>
 
-            <!-- Blogs with Toggle feature (Anchor point for mobile scroll focus) -->
+            <!-- Blogs with Toggle feature (loaded from blogs.txt) -->
             <div class="card" id="blog-scroll-anchor">
                 <div class="section-title blog-toggle" id="blog-toggle">
                     <span>Latest Blogs</span>
@@ -289,7 +297,7 @@
                 </div>
             </div>
 
-            <!-- MIDDLE ROW (LEARNING JOURNEY) -->
+            <!-- MIDDLE ROW (LEARNING JOURNEY - loaded from learning.txt) -->
             <div class="card" id="learning-row" style="padding: 10px;">
                 <p style="color: var(--text-muted); font-size: 13px; text-align: center;">Loading learning journey...</p>
             </div>
@@ -301,106 +309,35 @@
                 <div class="card feed-column">
                     <div class="tabs">
                         <div class="tab active" data-file="feed.txt" data-target="feed"><i class="fa-solid fa-rss"></i> Feed</div>
-                        <div class="tab" data-target="projects"><i class="fa-solid fa-diagram-project"></i> My Projects</div>
-                        <div class="tab" data-target="skills"><i class="fa-solid fa-code"></i> My Skills</div>
-                        <div class="tab" data-target="resume"><i class="fa-regular fa-file-lines"></i> Resume</div>
-                        <div class="tab" data-target="contact"><i class="fa-regular fa-envelope"></i> Contact Me</div>
+                        <div class="tab" data-file="projects.txt" data-target="projects"><i class="fa-solid fa-diagram-project"></i> My Projects</div>
+                        <div class="tab" data-file="skills.txt" data-target="skills"><i class="fa-solid fa-code"></i> My Skills</div>
+                        <div class="tab" data-file="resume.txt" data-target="resume"><i class="fa-regular fa-file-lines"></i> Resume</div>
+                        <div class="tab" data-file="contact.txt" data-target="contact"><i class="fa-regular fa-envelope"></i> Contact Me</div>
                     </div>
 
+                    <!-- Each tab content is empty; loaded dynamically from .txt -->
                     <div id="feed" class="tab-content active"><p style="color: var(--text-muted); font-size: 13px;">Loading feed...</p></div>
-
-                    <!-- Hardcoded Tabs -->
-                    <div id="projects" class="tab-content">
-                        <div class="project-grid">
-                            <div class="project-card">
-                                <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&q=80" alt="Automation Repository">
-                                <div class="project-card-body">
-                                    <h4>Python Automation Suite</h4>
-                                    <p>A collection of automated micro-tools including a WhatsApp Auto Messenger, Blink Photo Detection, and Wikipedia search integration.</p>
-                                </div>
-                            </div>
-                            <div class="project-card">
-                                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80" alt="Community Forum">
-                                <div class="project-card-body">
-                                    <h4>Web-Based Community Forum</h4>
-                                    <p>Designed a community forum utilizing Google Sheets as a live backend data source via Apps Script API integration.</p>
-                                </div>
-                            </div>
-                            <div class="project-card">
-                                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80" alt="Newsletter App">
-                                <div class="project-card-body">
-                                    <h4>OTP Newsletter Verification App</h4>
-                                    <p>Two-step web application using HTML and Apps Script to verify email authenticity via one-time passwords before database entry.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="skills" class="tab-content">
-                        <h3 style="margin-top:0; font-size: 16px;">Core Competencies</h3>
-                        <ul style="padding-left: 20px; color: var(--text-main);">
-                            <li style="margin-bottom: 10px;"><b>Programming:</b> Python, C, JavaScript</li>
-                            <li style="margin-bottom: 10px;"><b>Data Science:</b> Managing complete data science lifecycles, statistical analysis, and data manipulation using Pandas and NumPy.</li>
-                            <li style="margin-bottom: 10px;"><b>Content Creation:</b> Structuring educational video scripts and digital content on business, finance, and technology.</li>
-                            <li style="margin-bottom: 10px;"><b>Logic & Circuitry:</b> Boolean algebraic reduction and Karnaugh Maps.</li>
-                        </ul>
-                    </div>
-
-                    <div id="resume" class="tab-content">
-                        <h3 style="margin-top:0; font-size: 16px;">Education</h3>
-                        <p><b>Guru Ghasidas Vishwavidyalaya</b><br>B.Tech in Artificial Intelligence and Data Science</p>
-                        <hr style="border: none; border-top: 1px solid var(--border-color); margin: 20px 0;">
-                        <a href="#" style="color: var(--brand-green); font-weight: 600; text-decoration: none;"><i class="fa-solid fa-download"></i> Download Full Resume (PDF)</a>
-                    </div>
-
-                    <div id="contact" class="tab-content">
-                        <h3 style="margin: 0 0 8px 0; font-size: 16px;">Send Me a Message</h3>
-                        <p style="margin: 0 0 16px 0; font-size: 13px; color: var(--text-muted);">Have a project, inquiry, or tech question? Drop a line below.</p>
-                        <form class="contact-form" action="https://formsubmit.co/hello@sumitaidev.com" method="POST">
-                            <input type="hidden" name="_captcha" value="false">
-                            <input type="text" name="name" placeholder="Your Name" required>
-                            <input type="email" name="email" placeholder="Your Email Address" required>
-                            <input type="text" name="_subject" placeholder="Subject">
-                            <textarea name="message" placeholder="Write your message here..." required></textarea>
-                            <button type="submit"><i class="fa-regular fa-paper-plane"></i> Send Message</button>
-                        </form>
-                    </div>
+                    <div id="projects" class="tab-content"><p style="color: var(--text-muted); font-size: 13px;">Loading projects...</p></div>
+                    <div id="skills" class="tab-content"><p style="color: var(--text-muted); font-size: 13px;">Loading skills...</p></div>
+                    <div id="resume" class="tab-content"><p style="color: var(--text-muted); font-size: 13px;">Loading resume...</p></div>
+                    <div id="contact" class="tab-content"><p style="color: var(--text-muted); font-size: 13px;">Loading contact...</p></div>
                 </div>
 
-                <!-- 4. SIDE COLUMN (Platforms, Tools) -->
+                <!-- 4. SIDE COLUMN (Platforms from platforms.txt, Tools from tools.txt) -->
                 <div class="side-column">
-                    <!-- Platforms -->
+                    <!-- Platforms (loaded from platforms.txt) -->
                     <div class="card">
                         <div class="section-title">Platforms I've Built</div>
-                        <div class="platform-list">
-                            <a href="#" class="platform-item">
-                                <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=400&q=80" class="platform-thumb" alt="Community Forum">
-                                <div class="platform-info">
-                                    <h4>Community Forum App</h4>
-                                    <p>Live Sheets API backend</p>
-                                </div>
-                            </a>
-                            <a href="#" class="platform-item">
-                                <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=400&q=80" class="platform-thumb" alt="Attendance App">
-                                <div class="platform-info">
-                                    <h4>Geo-Attendance Portal</h4>
-                                    <p>Location-restricted check-ins</p>
-                                </div>
-                            </a>
+                        <div id="platforms-container" class="platform-list">
+                            <p style="color: var(--text-muted); font-size: 13px;">Loading platforms...</p>
                         </div>
                     </div>
 
-                    <!-- Tools -->
+                    <!-- Tools (loaded from tools.txt) -->
                     <div class="card">
                         <div class="section-title">Tools & Technologies</div>
-                        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-                            <span class="tool-badge">Python</span>
-                            <span class="tool-badge">C</span>
-                            <span class="tool-badge">NumPy</span>
-                            <span class="tool-badge">Pandas</span>
-                            <span class="tool-badge">Google Apps Script</span>
-                            <span class="tool-badge">HTML/CSS</span>
-                            <span class="tool-badge">JavaScript</span>
+                        <div id="tools-container" style="display: flex; flex-wrap: wrap; gap: 8px;">
+                            <p style="color: var(--text-muted); font-size: 13px;">Loading tools...</p>
                         </div>
                     </div>
                 </div>
@@ -439,7 +376,7 @@
     </div>
 
     <script>
-        // --- Blog Toggle Desktop/Mobile Default Logic ---
+        // --- Blog Toggle ---
         const blogToggle = document.getElementById('blog-toggle');
         const blogWrapper = document.getElementById('sidebar-blogs');
         const toggleIcon = blogToggle.querySelector('.toggle-icon');
@@ -461,18 +398,17 @@
             toggleIcon.classList.toggle('closed');
         });
 
-        // --- Modal Logic ---
+        // --- Modal ---
         const modal = document.getElementById('follow-modal');
         const followBtn = document.getElementById('follow-btn');
         const closeBtn = document.getElementById('close-modal');
-
         followBtn.addEventListener('click', () => modal.classList.add('show'));
         closeBtn.addEventListener('click', () => modal.classList.remove('show'));
         modal.addEventListener('click', (e) => {
             if (e.target === modal) modal.classList.remove('show');
         });
 
-        // --- Dark Mode Logic ---
+        // --- Dark Mode ---
         const themeToggleBtn = document.getElementById('theme-toggle');
         const icon = themeToggleBtn.querySelector('i');
         if (localStorage.getItem('theme') === 'dark') {
@@ -491,123 +427,51 @@
         });
 
         // ============================================================
-        // 🎯 RADAR CHART — EDIT THIS OBJECT TO CHANGE EVERYTHING
+        // 📥 FETCH .txt FILES — always fresh (cache-busted)
         // ============================================================
-        const RADAR_DATA = {
-            axes:     ["Commit", "Issue", "PullReq", "Review", "Repo"],
-            values:   [ 75,       50,      55,        77,        60 ],
-            maxValue: 100,
-            scale:    ["1K", "100", "50", "10", "1"]
-        };
+        const fileCache = {};
 
-        function renderRadarChart() {
-            const gridGroup   = document.getElementById('radar-grids');
-            const axesGroup   = document.getElementById('radar-axes');
-            const scaleGroup  = document.getElementById('radar-scale-labels');
-            const labelGroup  = document.getElementById('radar-axis-labels');
-            const polygon     = document.getElementById('radar-data-polygon');
-            const dotsGroup   = document.getElementById('radar-data-dots');
-            if (!gridGroup || !polygon) return; // learning.txt not loaded yet
-
-            // Clear previous render
-            [gridGroup, axesGroup, scaleGroup, labelGroup, dotsGroup].forEach(g => g.innerHTML = '');
-            polygon.setAttribute('points', '');
-
-            const CX = 110, CY = 100, MAX_R = 72;
-            const N = RADAR_DATA.axes.length;
-            const angleFor = i => (i * 2 * Math.PI) / N;
-
-            const polar = (radius, i) => {
-                const a = angleFor(i);
-                return { x: CX + radius * Math.sin(a), y: CY - radius * Math.cos(a) };
-            };
-            const valueToRadius = v => {
-                const c = Math.max(0, Math.min(v, RADAR_DATA.maxValue));
-                return (c / RADAR_DATA.maxValue) * MAX_R;
-            };
-            const SVGNS = 'http://www.w3.org/2000/svg';
-            const mk = (tag, attrs) => {
-                const el = document.createElementNS(SVGNS, tag);
-                for (const k in attrs) el.setAttribute(k, attrs[k]);
-                return el;
-            };
-
-            // 1. Grid rings
-            RADAR_DATA.scale.forEach((_, idx) => {
-                const r = MAX_R * (1 - idx / RADAR_DATA.scale.length);
-                const pts = [];
-                for (let i = 0; i < N; i++) {
-                    const p = polar(r, i);
-                    pts.push(`${p.x.toFixed(1)},${p.y.toFixed(1)}`);
-                }
-                gridGroup.appendChild(mk('polygon', { points: pts.join(' '), class: 'radar-grid' }));
-            });
-
-            // 2. Axis spokes
-            for (let i = 0; i < N; i++) {
-                const p = polar(MAX_R, i);
-                axesGroup.appendChild(mk('line', {
-                    x1: CX, y1: CY, x2: p.x.toFixed(1), y2: p.y.toFixed(1), class: 'radar-axis'
-                }));
-            }
-
-            // 3. Scale value labels (top → bottom = outer → inner)
-            RADAR_DATA.scale.forEach((label, idx) => {
-                const r = MAX_R * (1 - idx / RADAR_DATA.scale.length);
-                const t = mk('text', {
-                    x: CX, y: (CY - r + 3).toFixed(1), class: 'radar-value'
-                });
-                t.textContent = label;
-                scaleGroup.appendChild(t);
-            });
-
-            // 4. Axis name labels (outside outer ring)
-            RADAR_DATA.axes.forEach((name, i) => {
-                const p = polar(MAX_R + 16, i);
-                const t = mk('text', {
-                    x: p.x.toFixed(1), y: p.y.toFixed(1), class: 'radar-label'
-                });
-                t.textContent = name;
-                labelGroup.appendChild(t);
-            });
-
-            // 5. Data polygon
-            const dataPts = RADAR_DATA.values.map((v, i) => polar(valueToRadius(v), i));
-            polygon.setAttribute('points',
-                dataPts.map(p => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' '));
-
-            // 6. Dots
-            dataPts.forEach(p => {
-                dotsGroup.appendChild(mk('circle', {
-                    cx: p.x.toFixed(1), cy: p.y.toFixed(1), r: '3.2', class: 'radar-dot'
-                }));
-            });
-        }
-
-        // --- Fetch file & run radar render after learning.txt loads ---
-        const loadedFiles = new Set();
-        async function fetchTxtFile(fileName, targetId) {
-            if (loadedFiles.has(fileName)) return;
+        async function fetchTxtFile(fileName, targetId, forceFresh = false) {
             const container = document.getElementById(targetId);
+            if (!container) return;
+
+            const url = forceFresh
+                ? `${fileName}?v=${Date.now()}`
+                : `${fileName}?v=${Math.floor(Date.now() / 1000)}`;
+
             try {
-                const response = await fetch(fileName);
-                if (!response.ok) throw new Error(`Could not fetch ${fileName}`);
+                const response = await fetch(url, { cache: 'no-store' });
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
                 const html = await response.text();
+
+                if (fileCache[fileName] === html && !forceFresh) return;
+                fileCache[fileName] = html;
+
                 container.innerHTML = html;
-                loadedFiles.add(fileName);
 
                 if (targetId === 'feed' && window.twttr) {
                     window.twttr.widgets.load(container);
                 }
-                if (fileName === 'learning.txt') {
-                    renderRadarChart();   // 🔥 draw radar now that SVG containers exist
-                }
             } catch (error) {
-                container.innerHTML = `<p style="font-size: 13px; color: red;">Error loading ${fileName}. Check local server.</p>`;
+                console.error(`Error loading ${fileName}:`, error);
+                container.innerHTML = `<p style="font-size: 13px; color: red;">Error loading ${fileName}. (${error.message})</p>`;
             }
         }
 
-        // --- Tab Switching & Focus Logic ---
+        // Manual refresh helpers (from browser console)
+        window.refreshAll = function () {
+            fetchTxtFile('feed.txt', 'feed', true);
+            fetchTxtFile('blogs.txt', 'sidebar-blogs', true);
+            fetchTxtFile('learning.txt', 'learning-row', true);
+            fetchTxtFile('platforms.txt', 'platforms-container', true);
+            fetchTxtFile('tools.txt', 'tools-container', true);
+            fetchTxtFile('projects.txt', 'projects', true);
+            fetchTxtFile('skills.txt', 'skills', true);
+            fetchTxtFile('resume.txt', 'resume', true);
+            fetchTxtFile('contact.txt', 'contact', true);
+        };
+
+        // --- Tab Switching ---
         const tabs = document.querySelectorAll('.tab');
         const contents = document.querySelectorAll('.tab-content');
 
@@ -617,12 +481,11 @@
                 contents.forEach(c => c.classList.remove('active'));
                 
                 e.currentTarget.classList.add('active');
-                
                 const targetId = e.currentTarget.getAttribute('data-target');
                 document.getElementById(targetId).classList.add('active');
 
                 const fileName = e.currentTarget.getAttribute('data-file');
-                if (fileName) fetchTxtFile(fileName, targetId);
+                if (fileName) fetchTxtFile(fileName, targetId, true);
                 
                 if (window.innerWidth <= 992) {
                     document.getElementById('blog-scroll-anchor')
@@ -633,9 +496,20 @@
 
         // --- Initial Data Load ---
         document.addEventListener('DOMContentLoaded', () => {
+            // Feed
             fetchTxtFile('feed.txt', 'feed');
+            // Sidebar blogs
             fetchTxtFile('blogs.txt', 'sidebar-blogs');
+            // Middle learning row
             fetchTxtFile('learning.txt', 'learning-row');
+            // Side column
+            fetchTxtFile('platforms.txt', 'platforms-container');
+            fetchTxtFile('tools.txt', 'tools-container');
+            // Tabs (preload so switching is instant)
+            fetchTxtFile('projects.txt', 'projects');
+            fetchTxtFile('skills.txt', 'skills');
+            fetchTxtFile('resume.txt', 'resume');
+            fetchTxtFile('contact.txt', 'contact');
         });
     </script>
 </body>
