@@ -111,12 +111,19 @@
 
         /* --- Learning Journey Bar (Middle Row) --- */
         .learning-wrapper { display: flex; gap: 20px; align-items: center; padding: 10px; width: 100%; overflow: hidden; }
-        .leet-wrapper { position: relative; width: 140px; height: 140px; display: flex; flex-direction: column; justify-content: center; align-items: center; flex-shrink: 0; margin-left: 20px; }
-        .leet-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; transform: scale(1.15); }
-        .leet-score { font-size: 32px; font-weight: 500; color: var(--text-main); line-height: 1; margin-top: -5px; }
-        .leet-score span { font-size: 16px; color: var(--text-muted); }
-        .leet-solved { font-size: 14px; color: var(--text-main); margin-top: 6px; }
-        .leet-attempting { font-size: 13px; color: var(--text-muted); position: absolute; bottom: -8px; }
+        
+        /* Radar chart container */
+        .radar-wrapper { 
+            position: relative; 
+            width: 220px; 
+            height: 200px; 
+            flex-shrink: 0; 
+            margin-left: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .radar-svg { width: 100%; height: 100%; }
 
         .train-viewport { flex: 1; overflow: hidden; position: relative; height: 100px; display: flex; align-items: center; border-bottom: 2px solid var(--border-color); margin-left: 20px; }
         .train-track { display: flex; align-items: center; position: absolute; white-space: nowrap; animation: trainMoveLR 14s linear infinite; }
@@ -246,7 +253,7 @@
 <body>
 
     <div class="container">
-        <!-- 1. SIDEBAR (PROFILE & LATEST BLOGS) -->
+        <!-- 1. SIDEBAR -->
         <aside class="sidebar">
             <div class="card">
                 <div class="profile-header">
@@ -270,7 +277,6 @@
                 </ul>
             </div>
 
-            <!-- Blogs with Toggle feature (loaded from blogs.txt) -->
             <div class="card" id="blog-scroll-anchor">
                 <div class="section-title blog-toggle" id="blog-toggle">
                     <span>Latest Blogs</span>
@@ -285,7 +291,7 @@
         <!-- MAIN AREA -->
         <main class="main-content">
             
-            <!-- 2. TOP ROW (HEATMAP & STREAK) -->
+            <!-- TOP ROW -->
             <div class="top-row">
                 <div class="card heatmap-card">
                     <div class="section-title">GitHub Contribution Heatmap</div>
@@ -297,7 +303,7 @@
                 </div>
             </div>
 
-            <!-- MIDDLE ROW (LEARNING JOURNEY - loaded from learning.txt) -->
+            <!-- MIDDLE ROW (loaded from learning.txt) -->
             <div class="card" id="learning-row" style="padding: 10px;">
                 <p style="color: var(--text-muted); font-size: 13px; text-align: center;">Loading learning journey...</p>
             </div>
@@ -305,7 +311,7 @@
             <!-- BOTTOM SPLIT -->
             <div class="bottom-split">
                 
-                <!-- 3. FEED COLUMN (Feed & Content Tabs) -->
+                <!-- FEED COLUMN -->
                 <div class="card feed-column">
                     <div class="tabs">
                         <div class="tab active" data-file="feed.txt" data-target="feed"><i class="fa-solid fa-rss"></i> Feed</div>
@@ -315,7 +321,6 @@
                         <div class="tab" data-file="contact.txt" data-target="contact"><i class="fa-regular fa-envelope"></i> Contact Me</div>
                     </div>
 
-                    <!-- Each tab content is empty; loaded dynamically from .txt -->
                     <div id="feed" class="tab-content active"><p style="color: var(--text-muted); font-size: 13px;">Loading feed...</p></div>
                     <div id="projects" class="tab-content"><p style="color: var(--text-muted); font-size: 13px;">Loading projects...</p></div>
                     <div id="skills" class="tab-content"><p style="color: var(--text-muted); font-size: 13px;">Loading skills...</p></div>
@@ -323,9 +328,8 @@
                     <div id="contact" class="tab-content"><p style="color: var(--text-muted); font-size: 13px;">Loading contact...</p></div>
                 </div>
 
-                <!-- 4. SIDE COLUMN (Platforms from platforms.txt, Tools from tools.txt) -->
+                <!-- SIDE COLUMN -->
                 <div class="side-column">
-                    <!-- Platforms (loaded from platforms.txt) -->
                     <div class="card">
                         <div class="section-title">Platforms I've Built</div>
                         <div id="platforms-container" class="platform-list">
@@ -333,7 +337,6 @@
                         </div>
                     </div>
 
-                    <!-- Tools (loaded from tools.txt) -->
                     <div class="card">
                         <div class="section-title">Tools & Technologies</div>
                         <div id="tools-container" style="display: flex; flex-wrap: wrap; gap: 8px;">
@@ -350,7 +353,7 @@
         made with <i class="fa-solid fa-heart"></i> by sumit haldar
     </footer>
 
-    <!-- POPUP MODAL (Follow & Socials) -->
+    <!-- POPUP MODAL -->
     <div id="follow-modal" class="modal-overlay">
         <div class="modal-content">
             <button class="modal-close" id="close-modal">&times;</button>
@@ -427,6 +430,99 @@
         });
 
         // ============================================================
+        // 🎯 RADAR CHART DATA — EDIT ONLY THIS OBJECT
+        // ============================================================
+        const RADAR_DATA = {
+            axes:     ["Commit", "Issue", "PullReq", "Review", "Repo"],
+            values:   [ 75,       50,      15,        77,        60 ],
+            maxValue: 100,
+            scale:    ["10K", "1K", "100", "10", "1"]
+        };
+
+        function renderRadarChart() {
+            const gridGroup   = document.getElementById('radar-grids');
+            const axesGroup   = document.getElementById('radar-axes');
+            const scaleGroup  = document.getElementById('radar-scale-labels');
+            const labelGroup  = document.getElementById('radar-axis-labels');
+            const polygon     = document.getElementById('radar-data-polygon');
+            const dotsGroup   = document.getElementById('radar-data-dots');
+            if (!gridGroup || !polygon) return; // learning.txt not loaded yet
+
+            [gridGroup, axesGroup, scaleGroup, labelGroup, dotsGroup].forEach(g => g.innerHTML = '');
+            polygon.setAttribute('points', '');
+
+            const CX = 110, CY = 100, MAX_R = 72;
+            const N = RADAR_DATA.axes.length;
+            const angleFor = i => (i * 2 * Math.PI) / N;
+
+            const polar = (radius, i) => {
+                const a = angleFor(i);
+                return { x: CX + radius * Math.sin(a), y: CY - radius * Math.cos(a) };
+            };
+            const valueToRadius = v => {
+                const c = Math.max(0, Math.min(v, RADAR_DATA.maxValue));
+                return (c / RADAR_DATA.maxValue) * MAX_R;
+            };
+            const SVGNS = 'http://www.w3.org/2000/svg';
+            const mk = (tag, attrs) => {
+                const el = document.createElementNS(SVGNS, tag);
+                for (const k in attrs) el.setAttribute(k, attrs[k]);
+                return el;
+            };
+
+            // 1. Grid rings
+            RADAR_DATA.scale.forEach((_, idx) => {
+                const r = MAX_R * (1 - idx / RADAR_DATA.scale.length);
+                const pts = [];
+                for (let i = 0; i < N; i++) {
+                    const p = polar(r, i);
+                    pts.push(`${p.x.toFixed(1)},${p.y.toFixed(1)}`);
+                }
+                gridGroup.appendChild(mk('polygon', { points: pts.join(' '), class: 'radar-grid' }));
+            });
+
+            // 2. Axis spokes
+            for (let i = 0; i < N; i++) {
+                const p = polar(MAX_R, i);
+                axesGroup.appendChild(mk('line', {
+                    x1: CX, y1: CY, x2: p.x.toFixed(1), y2: p.y.toFixed(1), class: 'radar-axis'
+                }));
+            }
+
+            // 3. Scale labels
+            RADAR_DATA.scale.forEach((label, idx) => {
+                const r = MAX_R * (1 - idx / RADAR_DATA.scale.length);
+                const t = mk('text', {
+                    x: CX, y: (CY - r + 3).toFixed(1), class: 'radar-value'
+                });
+                t.textContent = label;
+                scaleGroup.appendChild(t);
+            });
+
+            // 4. Axis name labels
+            RADAR_DATA.axes.forEach((name, i) => {
+                const p = polar(MAX_R + 16, i);
+                const t = mk('text', {
+                    x: p.x.toFixed(1), y: p.y.toFixed(1), class: 'radar-label'
+                });
+                t.textContent = name;
+                labelGroup.appendChild(t);
+            });
+
+            // 5. Data polygon
+            const dataPts = RADAR_DATA.values.map((v, i) => polar(valueToRadius(v), i));
+            polygon.setAttribute('points',
+                dataPts.map(p => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' '));
+
+            // 6. Dots
+            dataPts.forEach(p => {
+                dotsGroup.appendChild(mk('circle', {
+                    cx: p.x.toFixed(1), cy: p.y.toFixed(1), r: '3.2', class: 'radar-dot'
+                }));
+            });
+        }
+
+        // ============================================================
         // 📥 FETCH .txt FILES — always fresh (cache-busted)
         // ============================================================
         const fileCache = {};
@@ -449,6 +545,11 @@
 
                 container.innerHTML = html;
 
+                // 🔥 Re-render radar chart every time learning.txt loads/refreshes
+                if (fileName === 'learning.txt') {
+                    renderRadarChart();
+                }
+                // Re-run Twitter widgets if feed loaded
                 if (targetId === 'feed' && window.twttr) {
                     window.twttr.widgets.load(container);
                 }
@@ -458,7 +559,7 @@
             }
         }
 
-        // Manual refresh helpers (from browser console)
+        // Manual refresh helpers
         window.refreshAll = function () {
             fetchTxtFile('feed.txt', 'feed', true);
             fetchTxtFile('blogs.txt', 'sidebar-blogs', true);
@@ -494,18 +595,13 @@
             });
         });
 
-        // --- Initial Data Load ---
+        // --- Initial Load ---
         document.addEventListener('DOMContentLoaded', () => {
-            // Feed
             fetchTxtFile('feed.txt', 'feed');
-            // Sidebar blogs
             fetchTxtFile('blogs.txt', 'sidebar-blogs');
-            // Middle learning row
-            fetchTxtFile('learning.txt', 'learning-row');
-            // Side column
+            fetchTxtFile('learning.txt', 'learning-row');   // ← radar chart renders here
             fetchTxtFile('platforms.txt', 'platforms-container');
             fetchTxtFile('tools.txt', 'tools-container');
-            // Tabs (preload so switching is instant)
             fetchTxtFile('projects.txt', 'projects');
             fetchTxtFile('skills.txt', 'skills');
             fetchTxtFile('resume.txt', 'resume');
