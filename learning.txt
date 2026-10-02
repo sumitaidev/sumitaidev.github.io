@@ -1,9 +1,6 @@
 <div class="learning-wrapper">
     
-    <!-- ============================================================
-         RADAR CHART — EDIT EVERYTHING FROM THE "RADAR_DATA" OBJECT
-         IN THE SCRIPT AT THE BOTTOM OF THIS FILE
-         ============================================================ -->
+    <!-- Radar chart SVG (JS in index.html fills the <g> groups) -->
     <div class="radar-wrapper">
         <svg class="radar-svg" viewBox="0 0 220 200" preserveAspectRatio="xMidYMid meet">
             <defs>
@@ -17,23 +14,17 @@
                 </style>
             </defs>
 
-            <!-- Grid rings (5 pentagons) -->
+            <!-- Containers filled by renderRadarChart() in index.html -->
             <g id="radar-grids"></g>
-            <!-- Axis spokes -->
             <g id="radar-axes"></g>
-            <!-- Scale value labels (on vertical Commit axis) -->
             <g id="radar-scale-labels"></g>
-            <!-- Axis name labels (Commit / Issue / ...) -->
             <g id="radar-axis-labels"></g>
-            <!-- Data polygon + dots (rendered by JS) -->
             <polygon id="radar-data-polygon" class="radar-polygon" points="" />
             <g id="radar-data-dots"></g>
         </svg>
     </div>
 
-    <!-- ============================================================
-         TRAIN (unchanged)
-         ============================================================ -->
+    <!-- Train animation -->
     <div class="train-viewport">
         <div class="train-track">
             <div class="train-car">DSA</div>
@@ -51,125 +42,3 @@
     </div>
 
 </div>
-
-<!-- ================================================================
-     RADAR CHART EDITOR — CHANGE ONLY THE OBJECT BELOW
-     ================================================================ -->
-<script>
-(function () {
-    /* ==============================================================
-       🎯 EDIT HERE — EVERYTHING YOU NEED IS IN THIS ONE OBJECT
-       ==============================================================
-       axes      : 5 labels, arranged clockwise starting from the top
-       values    : your actual metric values (0–100 scale, 100 = outer ring)
-       scale     : the numbers shown on the vertical axis (top → bottom)
-                   Use however many you want — the grid auto-adjusts.
-       maxValue  : the value that maps to the OUTERMOST ring
-       ============================================================== */
-    const RADAR_DATA = {
-        axes:     ["Commit", "Issue", "PullReq", "Review", "Repo"],
-        values:   [ 75,       50,      15,        77,        60 ],   // 0–100
-        maxValue: 100,
-        scale:    ["10K", "1K", "100", "10", "1"]                    // top → bottom
-    };
-    /* ==============================================================
-       ⛔ STOP EDITING — the code below does the math automatically
-       ============================================================== */
-
-    // --- Geometry constants (center + max radius) ---
-    const CX = 110, CY = 100, MAX_R = 72;
-    const N  = RADAR_DATA.axes.length;
-    const angleFor = i => (i * 2 * Math.PI) / N; // 0 = top, clockwise
-
-    // Convert polar → cartesian SVG coords
-    function polar(radius, index) {
-        const a = angleFor(index);
-        return {
-            x: CX + radius * Math.sin(a),
-            y: CY - radius * Math.cos(a)
-        };
-    }
-
-    // Scale value → radius (linear)
-    function valueToRadius(v) {
-        const clamped = Math.max(0, Math.min(v, RADAR_DATA.maxValue));
-        return (clamped / RADAR_DATA.maxValue) * MAX_R;
-    }
-
-    // --- 1. GRID RINGS ---
-    const gridGroup = document.getElementById('radar-grids');
-    RADAR_DATA.scale.forEach((_, levelIdx) => {
-        const totalLevels = RADAR_DATA.scale.length;
-        // top label = outermost ring, bottom label = innermost ring
-        const radius = MAX_R * (1 - levelIdx / totalLevels);
-        const pts = [];
-        for (let i = 0; i < N; i++) {
-            const p = polar(radius, i);
-            pts.push(`${p.x.toFixed(1)},${p.y.toFixed(1)}`);
-        }
-        const poly = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-        poly.setAttribute('points', pts.join(' '));
-        poly.setAttribute('class', 'radar-grid');
-        gridGroup.appendChild(poly);
-    });
-
-    // --- 2. AXIS SPOKES ---
-    const axesGroup = document.getElementById('radar-axes');
-    for (let i = 0; i < N; i++) {
-        const p = polar(MAX_R, i);
-        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-        line.setAttribute('x1', CX);
-        line.setAttribute('y1', CY);
-        line.setAttribute('x2', p.x.toFixed(1));
-        line.setAttribute('y2', p.y.toFixed(1));
-        line.setAttribute('class', 'radar-axis');
-        axesGroup.appendChild(line);
-    }
-
-    // --- 3. SCALE VALUE LABELS (placed on the vertical Commit axis) ---
-    const scaleGroup = document.getElementById('radar-scale-labels');
-    RADAR_DATA.scale.forEach((label, levelIdx) => {
-        const totalLevels = RADAR_DATA.scale.length;
-        const radius = MAX_R * (1 - levelIdx / totalLevels);
-        const x = CX;
-        const y = CY - radius + 3; // tiny nudge for readability
-        const t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        t.setAttribute('x', x);
-        t.setAttribute('y', y.toFixed(1));
-        t.setAttribute('class', 'radar-value');
-        t.textContent = label;
-        scaleGroup.appendChild(t);
-    });
-
-    // --- 4. AXIS NAME LABELS (outside outermost ring) ---
-    const labelGroup = document.getElementById('radar-axis-labels');
-    RADAR_DATA.axes.forEach((name, i) => {
-        const p = polar(MAX_R + 16, i);
-        const t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        t.setAttribute('x', p.x.toFixed(1));
-        t.setAttribute('y', p.y.toFixed(1));
-        t.setAttribute('class', 'radar-label');
-        t.textContent = name;
-        labelGroup.appendChild(t);
-    });
-
-    // --- 5. DATA POLYGON + DOTS ---
-    const polygon = document.getElementById('radar-data-polygon');
-    const dotsGroup = document.getElementById('radar-data-dots');
-    const dataPoints = RADAR_DATA.values.map((v, i) => polar(valueToRadius(v), i));
-
-    polygon.setAttribute(
-        'points',
-        dataPoints.map(p => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ')
-    );
-
-    dataPoints.forEach(p => {
-        const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-        c.setAttribute('cx', p.x.toFixed(1));
-        c.setAttribute('cy', p.y.toFixed(1));
-        c.setAttribute('r', '3.2');
-        c.setAttribute('class', 'radar-dot');
-        dotsGroup.appendChild(c);
-    });
-})();
-</script>
