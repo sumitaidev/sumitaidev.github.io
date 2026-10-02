@@ -1,21 +1,112 @@
 <div class="learning-wrapper">
     
-    <!-- Left Side: Perfected Circular Progress Arc -->
-    <div class="leet-wrapper">
-        <svg class="leet-svg" viewBox="0 0 100 100">
-            <!-- Cyan left arc -->
-            <path d="M 30 84 A 42 42 0 0 1 14 36" fill="none" stroke="#d5f4f0" stroke-width="4.5" stroke-linecap="round"/>
-            <circle cx="30" cy="84" r="3.5" fill="#00b8a3" />
+    <!-- Left Side: Radar Chart (replaces LeetCode progress arc) -->
+    <div class="radar-wrapper">
+        <svg class="radar-svg" viewBox="0 0 200 180" preserveAspectRatio="xMidYMid meet">
+            <defs>
+                <style>
+                    .radar-grid { fill: none; stroke: var(--border-color); stroke-width: 0.8; stroke-dasharray: 3 3; }
+                    .radar-axis { stroke: var(--border-color); stroke-width: 0.8; }
+                    .radar-label { font-size: 11px; fill: var(--text-main); font-weight: 500; text-anchor: middle; dominant-baseline: middle; }
+                    .radar-value { font-size: 7px; fill: var(--text-muted); text-anchor: middle; dominant-baseline: middle; }
+                    .radar-polygon { fill: rgba(44, 181, 93, 0.3); stroke: #2cb55d; stroke-width: 2; }
+                    .radar-dot { fill: #2cb55d; }
+                </style>
+            </defs>
+
+            <!-- Center: (100, 90), Radius max: 70 -->
+            <!-- Grid levels: 10K, 1K, 100, 10, 1 (log scale approximated) -->
+            <!-- 5 levels + center -->
             
-            <!-- Yellow top arc -->
-            <path d="M 22 24 A 42 42 0 0 1 78 24" fill="none" stroke="#fff0ce" stroke-width="4.5" stroke-linecap="round"/>
+            <!-- Outer grid (10K) -->
+            <polygon points="100,20 167,60 147,138 53,138 33,60" class="radar-grid" />
+            <!-- 1K -->
+            <polygon points="100,34 152,66 136,130 64,130 48,66" class="radar-grid" />
+            <!-- 100 -->
+            <polygon points="100,48 137,72 125,122 75,122 63,72" class="radar-grid" />
+            <!-- 10 -->
+            <polygon points="100,62 122,78 114,114 86,114 78,78" class="radar-grid" />
+            <!-- 1 -->
+            <polygon points="100,76 107,84 103,106 97,106 93,84" class="radar-grid" />
+
+            <!-- Axes -->
+            <line x1="100" y1="90" x2="100" y2="20" class="radar-axis" />
+            <line x1="100" y1="90" x2="167" y2="60" class="radar-axis" />
+            <line x1="100" y1="90" x2="147" y2="138" class="radar-axis" />
+            <line x1="100" y1="90" x2="53" y2="138" class="radar-axis" />
+            <line x1="100" y1="90" x2="33" y2="60" class="radar-axis" />
+
+            <!-- Labels (Top: Commit, Right: Issue, Bottom-Right: PullReq, Bottom-Left: Review, Left: Repo) -->
+            <text x="100" y="10" class="radar-label">Commit</text>
+            <text x="182" y="60" class="radar-label">Issue</text>
+            <text x="157" y="155" class="radar-label">PullReq</text>
+            <text x="43" y="155" class="radar-label">Review</text>
+            <text x="18" y="60" class="radar-label">Repo</text>
+
+            <!-- Values on axes (log scale indicators) -->
+            <text x="100" y="24" class="radar-value">10K</text>
+            <text x="100" y="38" class="radar-value">1K</text>
+            <text x="100" y="52" class="radar-value">100</text>
+            <text x="100" y="66" class="radar-value">10</text>
+            <text x="100" y="80" class="radar-value">1</text>
+
+            <!-- Data polygon (user stats) - mapped to log scale:
+                 Commit: ~1.2K -> radius ~30 (level between 1K and 100, closer to 1K)
+                 Issue: ~1 -> radius ~8 (near center)
+                 PullReq: ~1 -> radius ~8
+                 Review: ~0.5 -> radius ~5
+                 Repo: ~10 -> radius ~40 (between 10 and 100, closer to 10)
+                 
+                 Coordinates from center (100,90):
+                 Commit (top): (100, 90-32) = (100, 58)
+                 Issue (right): angle -18° from horizontal, radius 8 -> approx (107.6, 87.5)
+                 PullReq (bottom-right): angle 54° down, radius 8 -> approx (104.7, 96.5)
+                 Review (bottom-left): angle 126° down-left, radius 6 -> approx (96.5, 94.9)
+                 Repo (left): angle 162° up-left, radius 38 -> approx (63.9, 78.3)
+                 
+                 Let's compute more precisely:
+                 Angles from top (0°):
+                 Commit: 0°
+                 Issue: 72° (360/5)
+                 PullReq: 144°
+                 Review: 216°
+                 Repo: 288°
+                 
+                 Using formula: x = 100 + r*sin(angle), y = 90 - r*cos(angle)
+                 
+                 r values (log scale mapping):
+                 Commit: 1.2K -> log10(1200) ≈ 3.08; range 0-5 (1 to 100K? but max 10K=4) -> scale 0-4: 3.08/4*70 ≈ 54
+                 Issue: 1 -> log10(1)=0 -> 0/4*70 = 0 (center) - but let's give minimal 5
+                 PullReq: 1 -> 5
+                 Review: 0.5 -> log10(0.5) negative, clamp to 0 -> 5
+                 Repo: 10 -> log10(10)=1 -> 1/4*70 = 17.5
+                 
+                 Let's use actual visible radii:
+                 Commit: 30 (between 100 and 1K)
+                 Issue: 8
+                 PullReq: 8
+                 Review: 6
+                 Repo: 35
+            -->
             
-            <!-- Pink right arc -->
-            <path d="M 86 36 A 42 42 0 0 1 70 84" fill="none" stroke="#fbd5d5" stroke-width="4.5" stroke-linecap="round"/>
+            <!-- Calculate coordinates:
+                 Commit: (100, 90-30) = (100, 60)
+                 Issue: r=8, angle 72° -> x=100+8*sin(72)=100+7.6=107.6; y=90-8*cos(72)=90-2.5=87.5
+                 PullReq: r=8, angle 144° -> x=100+8*sin(144)=100+4.7=104.7; y=90-8*cos(144)=90+6.5=96.5
+                 Review: r=6, angle 216° -> x=100+6*sin(216)=100-3.5=96.5; y=90-6*cos(216)=90+4.9=94.9
+                 Repo: r=35, angle 288° -> x=100+35*sin(288)=100-33.3=66.7; y=90-35*cos(288)=90-10.8=79.2
+            -->
+            
+            <polygon points="100,60 107.6,87.5 104.7,96.5 96.5,94.9 66.7,79.2" class="radar-polygon" />
+            
+            <!-- Data points -->
+            <circle cx="100" cy="60" r="3" class="radar-dot" />
+            <circle cx="107.6" cy="87.5" r="3" class="radar-dot" />
+            <circle cx="104.7" cy="96.5" r="3" class="radar-dot" />
+            <circle cx="96.5" cy="94.9" r="3" class="radar-dot" />
+            <circle cx="66.7" cy="79.2" r="3" class="radar-dot" />
+            
         </svg>
-        <div class="leet-score">20<span>/100</span></div>
-        <div class="leet-solved"><i class="fa-solid fa-check" style="color: #2cb55d;"></i> Solved</div>
-        <div class="leet-attempting">0 Attempting</div>
     </div>
 
     <!-- Right Side: Left-to-Right Animated Train Journey -->
