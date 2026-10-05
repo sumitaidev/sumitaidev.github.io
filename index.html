@@ -31,38 +31,29 @@
             --border-color: rgba(255, 255, 255, 0.08);
             --border-hover: rgba(255, 148, 66, 0.35);
 
-            /* Orange primary */
             --brand-orange: #ff8c42;
             --brand-orange-soft: rgba(255, 140, 66, 0.15);
             --brand-orange-glow: rgba(255, 140, 66, 0.4);
-            /* Green secondary */
             --brand-green: #22c55e;
             --brand-green-soft: rgba(34, 197, 94, 0.15);
             --brand-green-glow: rgba(34, 197, 94, 0.4);
 
             --brand-gradient: linear-gradient(135deg, #ff8c42 0%, #ff6b35 50%, #22c55e 100%);
-            --brand-gradient-soft: linear-gradient(135deg, rgba(255, 140, 66, 0.2) 0%, rgba(34, 197, 94, 0.2) 100%);
 
-            /* Heatmap accent — light red */
             --heatmap-red: #ff6b6b;
-            --heatmap-red-soft: rgba(255, 107, 107, 0.15);
 
             --hover-bg: rgba(255, 255, 255, 0.06);
             --btn-text: #ffffff;
             --shadow-card: 0 20px 50px rgba(0, 0, 0, 0.5);
             --shadow-glow: 0 0 20px rgba(255, 140, 66, 0.25);
 
-            /* Radar chart */
             --chart-grid: rgba(255, 255, 255, 0.1);
             --chart-poly-fill: rgba(255, 140, 66, 0.22);
             --chart-poly-stroke: #ff8c42;
             --chart-dot: #ff8c42;
-            --chart-dot-accent: #22c55e;
         }
 
-        /* ============================================================
-           ☀️ LIGHT THEME
-           ============================================================ */
+        /* LIGHT THEME */
         body.light-mode {
             --bg-color: #fdf8f3;
             --bg-gradient: radial-gradient(ellipse at top, #fff4e6 0%, #fdf8f3 50%, #f5f7fa 100%);
@@ -81,11 +72,7 @@
             --brand-green-soft: rgba(22, 163, 74, 0.12);
             --brand-green-glow: rgba(22, 163, 74, 0.25);
 
-            --brand-gradient: linear-gradient(135deg, #ea580c 0%, #dc2626 50%, #16a34a 100%);
-            --brand-gradient-soft: linear-gradient(135deg, rgba(234, 88, 12, 0.15) 0%, rgba(22, 163, 74, 0.15) 100%);
-
             --heatmap-red: #ef4444;
-            --heatmap-red-soft: rgba(239, 68, 68, 0.12);
 
             --hover-bg: rgba(15, 23, 42, 0.05);
             --shadow-card: 0 10px 30px rgba(15, 23, 42, 0.08);
@@ -95,7 +82,6 @@
             --chart-poly-fill: rgba(234, 88, 12, 0.2);
             --chart-poly-stroke: #ea580c;
             --chart-dot: #ea580c;
-            --chart-dot-accent: #16a34a;
         }
 
         * { box-sizing: border-box; }
@@ -157,8 +143,7 @@
             border-radius: 8px; padding: 10px 12px;
             font-size: 13px; font-weight: 600;
             text-decoration: none; cursor: pointer;
-            border: none;
-            font-family: inherit;
+            border: none; font-family: inherit;
             transition: all 0.25s ease;
         }
         .btn-primary {
@@ -194,7 +179,6 @@
         .info-list a { color: inherit; text-decoration: none; }
         .info-list a:hover { text-decoration: underline; }
 
-        /* --- Blog Toggle --- */
         .blog-toggle { cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin: 0; }
         .toggle-icon { transition: transform 0.3s ease; color: var(--brand-orange); }
         .toggle-icon.closed { transform: rotate(180deg); }
@@ -238,11 +222,11 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            display: inline-block;
         }
 
         /* --- Learning Journey --- */
         .learning-wrapper { display: flex; gap: 20px; align-items: center; padding: 10px; width: 100%; overflow: hidden; }
-        
         .radar-wrapper {
             position: relative;
             width: 220px; height: 200px;
@@ -302,7 +286,7 @@
         .feed-column { flex: 1.6; min-width: 0; width: 100%; }
         .side-column { flex: 1; display: flex; flex-direction: column; gap: 20px; min-width: 280px; width: 100%; }
 
-        /* --- Tabs --- */
+        /* --- Tabs (Desktop) --- */
         .tabs {
             display: flex; gap: 8px;
             border-bottom: 1px solid var(--border-color);
@@ -358,12 +342,12 @@
         .tab-content iframe, .tab-content blockquote { max-width: 100%; border-radius: 8px; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* --- Radar Chart SVG --- */
+        /* --- Radar SVG --- */
         .radar-grid    { fill: none; stroke: var(--chart-grid); stroke-width: 0.8; stroke-dasharray: 3 3; }
         .radar-axis    { stroke: var(--chart-grid); stroke-width: 0.8; }
         .radar-label   { font-size: 11px; fill: var(--text-main); font-weight: 600; text-anchor: middle; dominant-baseline: middle; }
         .radar-value   { font-size: 7.5px; fill: var(--text-muted); text-anchor: middle; dominant-baseline: middle; }
-        .radar-polygon { fill: var(--chart-poly-fill); stroke: var(--chart-poly-stroke); stroke-width: 2; stroke-linejoin: round; filter: drop-shadow(0 0 6px var(--chart-poly-stroke)); }
+        .radar-polygon { fill: var(--chart-poly-fill); stroke: var(--chart-poly-stroke); stroke-width: 2; stroke-linejoin: round; }
         .radar-dot     { fill: var(--chart-dot); stroke: var(--card-solid); stroke-width: 1.2; }
 
         /* --- Project Cards --- */
@@ -381,18 +365,30 @@
         .project-card-body h4 { margin: 0 0 6px 0; font-size: 15px; color: var(--text-main); }
         .project-card-body p { margin: 0; font-size: 13px; color: var(--text-muted); line-height: 1.4; }
 
-        /* --- Tools --- */
-        .tool-badge {
-            background: var(--hover-bg);
-            color: var(--text-main);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            border: 1px solid var(--border-color);
-            display: inline-block;
+        /* ============================================================
+           🏷️ TOOL BADGES — now theme-aware (fixes gray-on-dark issue)
+           ============================================================ */
+        .tool-badge,
+        #tools-container span {
+            background: var(--brand-orange-soft) !important;
+            color: var(--brand-orange) !important;
+            padding: 6px 12px !important;
+            border-radius: 20px !important;
+            font-size: 12px !important;
+            font-weight: 600 !important;
+            border: 1px solid rgba(255, 140, 66, 0.3) !important;
+            display: inline-block !important;
             transition: all 0.2s ease;
+            text-decoration: none !important;
         }
-        .tool-badge:hover { border-color: var(--brand-green); color: var(--brand-green); box-shadow: 0 0 10px var(--brand-green-glow); }
+        .tool-badge:hover,
+        #tools-container span:hover {
+            background: var(--brand-green-soft) !important;
+            color: var(--brand-green) !important;
+            border-color: rgba(34, 197, 94, 0.4) !important;
+            box-shadow: 0 0 10px var(--brand-green-glow);
+            transform: translateY(-1px);
+        }
 
         /* --- Forms --- */
         .contact-form { display: flex; flex-direction: column; gap: 12px; max-width: 480px; margin-top: 15px; }
@@ -413,13 +409,9 @@
         .contact-form textarea { resize: vertical; min-height: 100px; }
         .contact-form button {
             background: linear-gradient(135deg, var(--brand-orange) 0%, #ff6b35 100%);
-            color: #fff;
-            border: none;
-            padding: 12px;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
+            color: #fff; border: none; padding: 12px;
+            border-radius: 8px; font-weight: 600;
+            cursor: pointer; transition: all 0.2s ease;
             box-shadow: 0 4px 15px var(--brand-orange-glow);
         }
         .contact-form button:hover { transform: translateY(-2px); filter: brightness(1.1); }
@@ -431,11 +423,7 @@
             font-size: 13px; color: var(--text-muted);
             font-weight: 500; margin-top: 20px;
         }
-        .footer i { color: var(--heatmap-red); margin: 0 3px; animation: heartbeat 1.5s ease-in-out infinite; }
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-        }
+        .footer i { color: var(--heatmap-red); margin: 0 3px; }
 
         /* --- Modal --- */
         .modal-overlay {
@@ -457,7 +445,7 @@
             position: relative; text-align: center;
             transform: translateY(20px);
             transition: transform 0.3s ease;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 40px var(--brand-orange-glow);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
         }
         .modal-overlay.show .modal-content { transform: translateY(0); }
         .modal-close {
@@ -499,70 +487,102 @@
         .btn-subscribe:hover { transform: translateY(-2px); filter: brightness(1.1); }
 
         /* ============================================================
-           📱 MOBILE — Fixed bottom nav, safe area aware
+           📱 MOBILE — TRUE fixed bottom nav
            ============================================================ */
         @media (max-width: 992px) {
             body {
-                padding: 16px 14px calc(80px + env(safe-area-inset-bottom, 0px)) 14px;
+                padding: 16px 14px calc(84px + env(safe-area-inset-bottom, 0px)) 14px;
             }
             .container { flex-direction: column; gap: 16px; }
             .sidebar { width: 100%; gap: 14px; }
             .top-row { flex-direction: column; }
             .bottom-split { flex-direction: column; gap: 16px; }
-            
-            .card { padding: 16px; border-radius: 12px; }
 
-            .feed-column { min-height: 60vh; } 
+            /* 🔑 CRITICAL: Remove backdrop-filter from ancestor so position:fixed
+               anchors to the VIEWPORT, not the card */
+            .feed-column {
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+                background: var(--card-bg) !important;
+                overflow: visible !important;
+                min-height: auto !important;
+                padding-bottom: 0 !important;
+            }
+
+            /* Also remove blur from any ancestor that could break fixed */
+            .container, .main-content, .bottom-split {
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+            }
+
+            .card { padding: 16px; border-radius: 12px; }
             .side-column { width: 100%; min-width: 0; }
-            
+
             .streak-card, #learning-row { display: none !important; }
 
-            /* Fixed bottom nav */
+            /* TRUE FIXED BOTTOM NAV */
             .tabs {
-                position: fixed;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                width: 100%;
-                background: rgba(10, 10, 15, 0.92);
-                backdrop-filter: blur(20px);
-                -webkit-backdrop-filter: blur(20px);
+                position: fixed !important;
+                bottom: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                top: auto !important;
+                width: 100vw !important;
+                max-width: 100vw !important;
+                margin: 0 !important;
+
+                background: rgba(10, 10, 15, 0.96) !important;
+                backdrop-filter: blur(24px) saturate(180%) !important;
+                -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+
                 border-top: 1px solid var(--border-color);
                 border-bottom: none;
-                margin: 0;
-                padding: 8px 4px calc(8px + env(safe-area-inset-bottom, 0px)) 4px;
-                display: flex;
+                padding: 6px 4px calc(6px + env(safe-area-inset-bottom, 0px)) 4px;
+
+                display: flex !important;
+                flex-wrap: nowrap !important;
                 justify-content: space-around;
                 align-items: center;
+                gap: 0;
+
                 z-index: 9999;
                 box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.6);
+
                 border-radius: 0;
-                overflow-x: visible;
-                scrollbar-width: none;
-                gap: 0;
+                overflow: hidden !important;
+                transform: none !important;
+                will-change: auto;
             }
             body.light-mode .tabs {
-                background: rgba(255, 255, 255, 0.95);
-                box-shadow: 0 -4px 20px rgba(15, 23, 42, 0.1);
+                background: rgba(255, 255, 255, 0.96) !important;
+                box-shadow: 0 -4px 20px rgba(15, 23, 42, 0.12);
             }
-            .tabs::-webkit-scrollbar { display: none; }
 
             .tab {
-                flex: 1;
+                flex: 1 1 0;
+                min-width: 0;
                 flex-direction: column;
                 gap: 3px;
                 font-size: 10px;
-                padding: 8px 4px;
+                padding: 6px 2px;
                 background: transparent !important;
                 border: none;
                 border-radius: 10px;
                 color: var(--text-muted);
-                min-width: 0;
                 transition: all 0.2s ease;
+                overflow: hidden;
             }
             .tab i { font-size: 18px; transition: transform 0.2s ease; }
+            .tab .tab-text, .tab span {
+                display: block;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 100%;
+                text-align: center;
+            }
             .tab.active {
-                color: var(--brand-orange);
+                color: var(--brand-orange) !important;
                 font-weight: 700;
                 background: var(--brand-orange-soft) !important;
                 box-shadow: inset 0 -2px 0 var(--brand-orange);
@@ -570,20 +590,9 @@
             .tab.active i {
                 color: var(--brand-orange);
                 transform: scale(1.1);
-                filter: drop-shadow(0 0 6px var(--brand-orange-glow));
-            }
-            .tab span, .tab-text {
-                display: block;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                max-width: 100%;
             }
 
-            /* Modal fit */
             .modal-content { padding: 24px 20px; }
-
-            /* Mobile typography */
             .section-title { font-size: 11px; }
             .profile-info h1 { font-size: 17px; }
             .radar-wrapper { width: 180px; height: 160px; }
@@ -591,8 +600,8 @@
 
         /* Very small screens */
         @media (max-width: 400px) {
-            body { padding: 12px 10px calc(78px + env(safe-area-inset-bottom, 0px)) 10px; }
-            .tab { font-size: 9px; padding: 6px 2px; }
+            body { padding: 12px 10px calc(80px + env(safe-area-inset-bottom, 0px)) 10px; }
+            .tab { font-size: 9px; padding: 5px 2px; }
             .tab i { font-size: 16px; }
             .card { padding: 14px; }
         }
@@ -601,7 +610,7 @@
 <body>
 
     <div class="container">
-        <!-- 1. SIDEBAR -->
+        <!-- SIDEBAR -->
         <aside class="sidebar">
             <div class="card">
                 <div class="profile-header">
@@ -636,10 +645,8 @@
             </div>
         </aside>
 
-        <!-- MAIN AREA -->
+        <!-- MAIN -->
         <main class="main-content">
-            
-            <!-- TOP ROW -->
             <div class="top-row">
                 <div class="card heatmap-card">
                     <div class="section-title">GitHub Contribution Heatmap</div>
@@ -651,22 +658,19 @@
                 </div>
             </div>
 
-            <!-- MIDDLE ROW -->
             <div class="card" id="learning-row" style="padding: 10px;">
                 <p style="color: var(--text-muted); font-size: 13px; text-align: center;">Loading learning journey...</p>
             </div>
 
-            <!-- BOTTOM SPLIT -->
             <div class="bottom-split">
-                
                 <!-- FEED COLUMN -->
                 <div class="card feed-column">
                     <div class="tabs">
-                        <div class="tab active" data-file="feed.txt" data-target="feed"><i class="fa-solid fa-rss"></i> <span>Feed</span></div>
-                        <div class="tab" data-file="projects.txt" data-target="projects"><i class="fa-solid fa-diagram-project"></i> <span>Projects</span></div>
-                        <div class="tab" data-file="skills.txt" data-target="skills"><i class="fa-solid fa-code"></i> <span>Skills</span></div>
-                        <div class="tab" data-file="resume.txt" data-target="resume"><i class="fa-regular fa-file-lines"></i> <span>Resume</span></div>
-                        <div class="tab" data-file="contact.txt" data-target="contact"><i class="fa-regular fa-envelope"></i> <span>Contact</span></div>
+                        <div class="tab active" data-file="feed.txt" data-target="feed"><i class="fa-solid fa-rss"></i> <span class="tab-text">Feed</span></div>
+                        <div class="tab" data-file="projects.txt" data-target="projects"><i class="fa-solid fa-diagram-project"></i> <span class="tab-text">Projects</span></div>
+                        <div class="tab" data-file="skills.txt" data-target="skills"><i class="fa-solid fa-code"></i> <span class="tab-text">Skills</span></div>
+                        <div class="tab" data-file="resume.txt" data-target="resume"><i class="fa-regular fa-file-lines"></i> <span class="tab-text">Resume</span></div>
+                        <div class="tab" data-file="contact.txt" data-target="contact"><i class="fa-regular fa-envelope"></i> <span class="tab-text">Contact</span></div>
                     </div>
 
                     <div id="feed" class="tab-content active"><p style="color: var(--text-muted); font-size: 13px;">Loading feed...</p></div>
@@ -696,12 +700,10 @@
         </main>
     </div>
 
-    <!-- FOOTER -->
     <footer class="footer">
         made with <i class="fa-solid fa-heart"></i> by sumit haldar
     </footer>
 
-    <!-- POPUP MODAL -->
     <div id="follow-modal" class="modal-overlay">
         <div class="modal-content">
             <button class="modal-close" id="close-modal">&times;</button>
@@ -759,11 +761,8 @@
             if (e.target === modal) modal.classList.remove('show');
         });
 
-        // ============================================================
-        // 🌙 THEME — DARK IS DEFAULT
-        // ============================================================
+        // --- Theme (dark default) ---
         const themeToggleBtn = document.getElementById('theme-toggle');
-
         if (localStorage.getItem('theme') === 'light') {
             document.body.classList.add('light-mode');
             themeToggleBtn.innerHTML = '<i class="fa-solid fa-moon"></i> Toggle Dark Mode';
@@ -771,7 +770,6 @@
             localStorage.setItem('theme', 'dark');
             themeToggleBtn.innerHTML = '<i class="fa-solid fa-sun"></i> Toggle Light Mode';
         }
-
         themeToggleBtn.addEventListener('click', () => {
             document.body.classList.toggle('light-mode');
             if (document.body.classList.contains('light-mode')) {
@@ -783,9 +781,7 @@
             }
         });
 
-        // ============================================================
-        // 🎯 RADAR CHART DATA — EDIT ONLY THIS OBJECT
-        // ============================================================
+        // --- Radar Chart ---
         const RADAR_DATA = {
             axes:     ["Commit", "Issue", "PullReq", "Review", "Repo"],
             values:   [ 75,       50,      65,        77,        60 ],
@@ -808,7 +804,6 @@
             const CX = 110, CY = 100, MAX_R = 72;
             const N = RADAR_DATA.axes.length;
             const angleFor = i => (i * 2 * Math.PI) / N;
-
             const polar = (radius, i) => {
                 const a = angleFor(i);
                 return { x: CX + radius * Math.sin(a), y: CY - radius * Math.cos(a) };
@@ -833,36 +828,26 @@
                 }
                 gridGroup.appendChild(mk('polygon', { points: pts.join(' '), class: 'radar-grid' }));
             });
-
             for (let i = 0; i < N; i++) {
                 const p = polar(MAX_R, i);
                 axesGroup.appendChild(mk('line', {
                     x1: CX, y1: CY, x2: p.x.toFixed(1), y2: p.y.toFixed(1), class: 'radar-axis'
                 }));
             }
-
             RADAR_DATA.scale.forEach((label, idx) => {
                 const r = MAX_R * (1 - idx / RADAR_DATA.scale.length);
-                const t = mk('text', {
-                    x: CX, y: (CY - r + 3).toFixed(1), class: 'radar-value'
-                });
+                const t = mk('text', { x: CX, y: (CY - r + 3).toFixed(1), class: 'radar-value' });
                 t.textContent = label;
                 scaleGroup.appendChild(t);
             });
-
             RADAR_DATA.axes.forEach((name, i) => {
                 const p = polar(MAX_R + 16, i);
-                const t = mk('text', {
-                    x: p.x.toFixed(1), y: p.y.toFixed(1), class: 'radar-label'
-                });
+                const t = mk('text', { x: p.x.toFixed(1), y: p.y.toFixed(1), class: 'radar-label' });
                 t.textContent = name;
                 labelGroup.appendChild(t);
             });
-
             const dataPts = RADAR_DATA.values.map((v, i) => polar(valueToRadius(v), i));
-            polygon.setAttribute('points',
-                dataPts.map(p => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' '));
-
+            polygon.setAttribute('points', dataPts.map(p => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' '));
             dataPts.forEach(p => {
                 dotsGroup.appendChild(mk('circle', {
                     cx: p.x.toFixed(1), cy: p.y.toFixed(1), r: '3.2', class: 'radar-dot'
@@ -870,29 +855,21 @@
             });
         }
 
-        // ============================================================
-        // 📥 FETCH .txt FILES
-        // ============================================================
+        // --- Fetch .txt ---
         const fileCache = {};
-
         async function fetchTxtFile(fileName, targetId, forceFresh = false) {
             const container = document.getElementById(targetId);
             if (!container) return;
-
             const url = forceFresh
                 ? `${fileName}?v=${Date.now()}`
                 : `${fileName}?v=${Math.floor(Date.now() / 1000)}`;
-
             try {
                 const response = await fetch(url, { cache: 'no-store' });
                 if (!response.ok) throw new Error(`HTTP ${response.status}`);
                 const html = await response.text();
-
                 if (fileCache[fileName] === html && !forceFresh) return;
                 fileCache[fileName] = html;
-
                 container.innerHTML = html;
-
                 if (fileName === 'learning.txt') renderRadarChart();
                 if (targetId === 'feed' && window.twttr) window.twttr.widgets.load(container);
             } catch (error) {
@@ -902,33 +879,24 @@
         }
 
         window.refreshAll = function () {
-            fetchTxtFile('feed.txt', 'feed', true);
-            fetchTxtFile('blogs.txt', 'sidebar-blogs', true);
-            fetchTxtFile('learning.txt', 'learning-row', true);
-            fetchTxtFile('platforms.txt', 'platforms-container', true);
-            fetchTxtFile('tools.txt', 'tools-container', true);
-            fetchTxtFile('projects.txt', 'projects', true);
-            fetchTxtFile('skills.txt', 'skills', true);
-            fetchTxtFile('resume.txt', 'resume', true);
-            fetchTxtFile('contact.txt', 'contact', true);
+            ['feed', 'blogs', 'learning', 'platforms', 'tools', 'projects', 'skills', 'resume', 'contact'].forEach(name => {
+                const target = name === 'blogs' ? 'sidebar-blogs' : (name === 'learning' ? 'learning-row' : (name === 'platforms' ? 'platforms-container' : (name === 'tools' ? 'tools-container' : name)));
+                fetchTxtFile(`${name}.txt`, target, true);
+            });
         };
 
-        // --- Tab Switching ---
+        // --- Tabs ---
         const tabs = document.querySelectorAll('.tab');
         const contents = document.querySelectorAll('.tab-content');
-
         tabs.forEach(tab => {
             tab.addEventListener('click', (e) => {
                 tabs.forEach(t => t.classList.remove('active'));
                 contents.forEach(c => c.classList.remove('active'));
-                
                 e.currentTarget.classList.add('active');
                 const targetId = e.currentTarget.getAttribute('data-target');
                 document.getElementById(targetId).classList.add('active');
-
                 const fileName = e.currentTarget.getAttribute('data-file');
                 if (fileName) fetchTxtFile(fileName, targetId, true);
-                
                 if (window.innerWidth <= 992) {
                     document.getElementById('blog-scroll-anchor')
                         .scrollIntoView({ behavior: 'smooth', block: 'start' });
