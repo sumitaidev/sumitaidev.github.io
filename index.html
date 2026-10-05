@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     
     <title>Sumit Haldar - AI & Data Science Portfolio</title>
     <meta name="description" content="Portfolio of Sumit Haldar, a B.Tech student in Artificial Intelligence & Data Science. Discover my projects, tools, and technical articles.">
@@ -18,61 +18,93 @@
     
     <style>
         /* ============================================================
-           🎨 DARK THEME (DEFAULT) — Cyan / Blue Glassmorphism
+           🎨 DARK THEME (DEFAULT) — Orange + Green Glassmorphism
            ============================================================ */
         :root {
-            --bg-color: #090d16;
-            --bg-gradient: linear-gradient(145deg, #0f172a 0%, #050515 100%);
+            --bg-color: #0a0a0f;
+            --bg-gradient: radial-gradient(ellipse at top, #1a0f0a 0%, #0a0a0f 50%, #050508 100%);
             --card-bg: rgba(255, 255, 255, 0.04);
-            --card-solid: #0f172a;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --text-dim: #64748b;
+            --card-solid: #12121a;
+            --text-main: #f5f7fa;
+            --text-muted: #a0a8b8;
+            --text-dim: #6b7280;
             --border-color: rgba(255, 255, 255, 0.08);
-            --brand-green: #06b6d4;                     /* was #2cb55d — now cyan */
-            --brand-green-soft: rgba(6, 182, 212, 0.15);
-            --brand-dark: rgba(255, 255, 255, 0.05);
-            --brand-gradient: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
-            --hover-bg: rgba(255, 255, 255, 0.07);
+            --border-hover: rgba(255, 148, 66, 0.35);
+
+            /* Orange primary */
+            --brand-orange: #ff8c42;
+            --brand-orange-soft: rgba(255, 140, 66, 0.15);
+            --brand-orange-glow: rgba(255, 140, 66, 0.4);
+            /* Green secondary */
+            --brand-green: #22c55e;
+            --brand-green-soft: rgba(34, 197, 94, 0.15);
+            --brand-green-glow: rgba(34, 197, 94, 0.4);
+
+            --brand-gradient: linear-gradient(135deg, #ff8c42 0%, #ff6b35 50%, #22c55e 100%);
+            --brand-gradient-soft: linear-gradient(135deg, rgba(255, 140, 66, 0.2) 0%, rgba(34, 197, 94, 0.2) 100%);
+
+            /* Heatmap accent — light red */
+            --heatmap-red: #ff6b6b;
+            --heatmap-red-soft: rgba(255, 107, 107, 0.15);
+
+            --hover-bg: rgba(255, 255, 255, 0.06);
             --btn-text: #ffffff;
-            --shadow-card: 0 20px 50px rgba(0, 0, 0, 0.4);
-            --shadow-glow: 0 0 20px rgba(6, 182, 212, 0.25);
+            --shadow-card: 0 20px 50px rgba(0, 0, 0, 0.5);
+            --shadow-glow: 0 0 20px rgba(255, 140, 66, 0.25);
 
             /* Radar chart */
-            --chart-grid: rgba(255, 255, 255, 0.12);
-            --chart-poly-fill: rgba(6, 182, 212, 0.25);
-            --chart-poly-stroke: #06b6d4;
-            --chart-dot: #06b6d4;
+            --chart-grid: rgba(255, 255, 255, 0.1);
+            --chart-poly-fill: rgba(255, 140, 66, 0.22);
+            --chart-poly-stroke: #ff8c42;
+            --chart-dot: #ff8c42;
+            --chart-dot-accent: #22c55e;
         }
 
         /* ============================================================
-           ☀️ LIGHT THEME (toggle)
+           ☀️ LIGHT THEME
            ============================================================ */
         body.light-mode {
-            --bg-color: #f4f6fb;
-            --bg-gradient: linear-gradient(145deg, #e8eefc 0%, #f7f9fd 100%);
+            --bg-color: #fdf8f3;
+            --bg-gradient: radial-gradient(ellipse at top, #fff4e6 0%, #fdf8f3 50%, #f5f7fa 100%);
             --card-bg: rgba(255, 255, 255, 0.85);
             --card-solid: #ffffff;
-            --text-main: #0f172a;
-            --text-muted: #475569;
-            --text-dim: #64748b;
+            --text-main: #1a1a1a;
+            --text-muted: #4b5563;
+            --text-dim: #6b7280;
             --border-color: rgba(15, 23, 42, 0.08);
-            --brand-green: #0891b2;
-            --brand-green-soft: rgba(8, 145, 178, 0.12);
-            --brand-dark: rgba(15, 23, 42, 0.05);
-            --brand-gradient: linear-gradient(135deg, #0891b2 0%, #2563eb 100%);
-            --hover-bg: rgba(15, 23, 42, 0.06);
-            --btn-text: #ffffff;
-            --shadow-card: 0 10px 30px rgba(15, 23, 42, 0.08);
-            --shadow-glow: 0 0 20px rgba(8, 145, 178, 0.15);
+            --border-hover: rgba(255, 140, 66, 0.4);
 
-            --chart-grid: rgba(15, 23, 42, 0.15);
-            --chart-poly-fill: rgba(8, 145, 178, 0.2);
-            --chart-poly-stroke: #0891b2;
-            --chart-dot: #0891b2;
+            --brand-orange: #ea580c;
+            --brand-orange-soft: rgba(234, 88, 12, 0.12);
+            --brand-orange-glow: rgba(234, 88, 12, 0.25);
+            --brand-green: #16a34a;
+            --brand-green-soft: rgba(22, 163, 74, 0.12);
+            --brand-green-glow: rgba(22, 163, 74, 0.25);
+
+            --brand-gradient: linear-gradient(135deg, #ea580c 0%, #dc2626 50%, #16a34a 100%);
+            --brand-gradient-soft: linear-gradient(135deg, rgba(234, 88, 12, 0.15) 0%, rgba(22, 163, 74, 0.15) 100%);
+
+            --heatmap-red: #ef4444;
+            --heatmap-red-soft: rgba(239, 68, 68, 0.12);
+
+            --hover-bg: rgba(15, 23, 42, 0.05);
+            --shadow-card: 0 10px 30px rgba(15, 23, 42, 0.08);
+            --shadow-glow: 0 0 20px rgba(234, 88, 12, 0.15);
+
+            --chart-grid: rgba(15, 23, 42, 0.12);
+            --chart-poly-fill: rgba(234, 88, 12, 0.2);
+            --chart-poly-stroke: #ea580c;
+            --chart-dot: #ea580c;
+            --chart-dot-accent: #16a34a;
         }
 
         * { box-sizing: border-box; }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -80,14 +112,13 @@
             background: var(--bg-gradient);
             background-attachment: fixed;
             color: var(--text-main);
-            margin: 0;
             padding: 24px 16px;
             display: flex;
             flex-direction: column;
             align-items: center;
             transition: background 0.4s ease, color 0.3s ease;
-            overflow-x: hidden;
             min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
         }
 
         .container { display: flex; gap: 20px; max-width: 1200px; width: 100%; align-items: flex-start; }
@@ -112,12 +143,12 @@
             width: 68px; height: 68px;
             border-radius: 12px;
             object-fit: cover;
-            border: 2px solid var(--brand-green);
-            box-shadow: var(--shadow-glow);
+            border: 2px solid var(--brand-orange);
+            box-shadow: 0 0 20px var(--brand-orange-glow);
         }
         .profile-info h1 { font-size: 18px; margin: 0 0 3px 0; color: var(--text-main); }
         .profile-info p { font-size: 13px; color: var(--text-muted); margin: 0; }
-        .profile-info p:last-child { color: var(--brand-green) !important; font-weight: 500; }
+        .profile-info p:last-child { color: var(--brand-orange) !important; font-weight: 600; }
         
         .btn-group { display: flex; flex-direction: column; gap: 8px; margin-top: 15px; }
 
@@ -131,36 +162,41 @@
             transition: all 0.25s ease;
         }
         .btn-primary {
-            background: var(--brand-gradient);
+            background: linear-gradient(135deg, var(--brand-orange) 0%, #ff6b35 100%);
             color: #ffffff;
-            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3);
+            box-shadow: 0 4px 15px var(--brand-orange-glow);
         }
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 22px rgba(6, 182, 212, 0.5);
+            box-shadow: 0 6px 22px var(--brand-orange-glow);
+            filter: brightness(1.1);
         }
         .btn-meeting {
-            background: var(--brand-dark);
-            color: var(--text-main);
-            border: 1px solid var(--border-color);
+            background: var(--brand-green-soft);
+            color: var(--brand-green);
+            border: 1px solid rgba(34, 197, 94, 0.3);
         }
-        .btn-meeting:hover { background: var(--hover-bg); transform: translateY(-1px); }
+        .btn-meeting:hover {
+            background: rgba(34, 197, 94, 0.25);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px var(--brand-green-glow);
+        }
         .btn-toggle {
             background: transparent;
             color: var(--text-main);
             border: 1px solid var(--border-color);
         }
-        .btn-toggle:hover { background: var(--hover-bg); }
+        .btn-toggle:hover { background: var(--hover-bg); border-color: var(--border-hover); }
         
         .info-list { list-style: none; padding: 0; margin: 16px 0 0 0; font-size: 13px; color: var(--text-muted); }
         .info-list li { margin-bottom: 12px; display: flex; align-items: center; gap: 10px; word-break: break-word; }
-        .info-list i { width: 16px; text-align: center; color: var(--brand-green); }
+        .info-list i { width: 16px; text-align: center; color: var(--brand-orange); }
         .info-list a { color: inherit; text-decoration: none; }
         .info-list a:hover { text-decoration: underline; }
 
-        /* --- Blog Toggle & List --- */
+        /* --- Blog Toggle --- */
         .blog-toggle { cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin: 0; }
-        .toggle-icon { transition: transform 0.3s ease; color: var(--brand-green); }
+        .toggle-icon { transition: transform 0.3s ease; color: var(--brand-orange); }
         .toggle-icon.closed { transform: rotate(180deg); }
         .blog-wrapper { max-height: 1500px; opacity: 1; transition: max-height 0.4s ease, opacity 0.3s ease, margin-top 0.3s ease; overflow: hidden; margin-top: 14px; }
         .blog-wrapper.closed { max-height: 0; opacity: 0; margin-top: 0; }
@@ -176,9 +212,9 @@
         }
         .blog-item:hover, .platform-item:hover {
             background: var(--hover-bg);
-            border-color: var(--brand-green);
+            border-color: var(--border-hover);
             transform: translateY(-2px);
-            box-shadow: var(--shadow-glow);
+            box-shadow: 0 6px 20px var(--brand-orange-glow);
         }
         .blog-thumb, .platform-thumb {
             width: 100%; aspect-ratio: 16 / 9; border-radius: 8px;
@@ -195,10 +231,13 @@
 
         .section-title {
             font-size: 12px; font-weight: 700;
-            color: var(--brand-green);
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.2px;
             margin: 0 0 14px 0;
+            background: linear-gradient(135deg, var(--brand-orange) 0%, var(--brand-green) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         /* --- Learning Journey --- */
@@ -225,7 +264,7 @@
             animation: trainMoveLR 14s linear infinite;
         }
         .train-car {
-            background: var(--brand-dark);
+            background: var(--card-bg);
             color: var(--text-main);
             border: 1px solid var(--border-color);
             padding: 10px 18px;
@@ -233,21 +272,21 @@
             font-weight: 600;
             font-size: 13px;
             position: relative;
-            border-bottom: 6px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 6px solid var(--border-color);
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
         }
         .train-car.engine {
             border-radius: 6px 14px 0 0;
-            background: var(--brand-gradient);
+            background: linear-gradient(135deg, var(--brand-orange) 0%, var(--brand-green) 100%);
             color: #fff;
             border-color: transparent;
-            box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
+            box-shadow: 0 0 20px var(--brand-orange-glow);
         }
         .train-car::before, .train-car::after {
             content: ''; position: absolute;
             bottom: -12px; width: 16px; height: 16px;
             background: #333; border-radius: 50%;
-            border: 2px solid #aaa;
+            border: 2px solid var(--brand-orange);
         }
         .train-car::before { left: 10px; }
         .train-car::after { right: 10px; }
@@ -263,7 +302,7 @@
         .feed-column { flex: 1.6; min-width: 0; width: 100%; }
         .side-column { flex: 1; display: flex; flex-direction: column; gap: 20px; min-width: 280px; width: 100%; }
 
-        /* --- Tabs (hidden scrollbar) --- */
+        /* --- Tabs --- */
         .tabs {
             display: flex; gap: 8px;
             border-bottom: 1px solid var(--border-color);
@@ -291,13 +330,13 @@
         }
         .tab:hover { background: var(--hover-bg); color: var(--text-main); }
         .tab.active {
-            color: var(--text-main);
-            background: var(--hover-bg);
-            border-color: var(--border-color);
+            color: var(--brand-orange);
+            background: var(--brand-orange-soft);
+            border-color: rgba(255, 140, 66, 0.3);
             font-weight: 600;
-            box-shadow: var(--shadow-glow);
+            box-shadow: 0 0 15px var(--brand-orange-glow);
         }
-        .tab.active i { color: var(--brand-green); }
+        .tab.active i { color: var(--brand-orange); }
 
         .tab-content {
             display: none; min-height: 280px;
@@ -307,14 +346,13 @@
         }
         .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
 
-        /* Content typography inside tabs */
         .tab-content h3 { color: var(--text-main); font-size: 16px; margin: 0 0 12px 0; }
         .tab-content p { color: var(--text-muted); margin: 0 0 10px 0; }
         .tab-content ul { color: var(--text-muted); padding-left: 20px; margin: 0 0 12px 0; }
         .tab-content li { margin-bottom: 10px; }
         .tab-content b, .tab-content strong { color: var(--text-main); }
-        .tab-content a { color: var(--brand-green); text-decoration: none; font-weight: 600; }
-        .tab-content a:hover { text-decoration: underline; }
+        .tab-content a { color: var(--brand-orange); text-decoration: none; font-weight: 600; }
+        .tab-content a:hover { text-decoration: underline; color: var(--brand-green); }
         .tab-content hr { border: none; border-top: 1px solid var(--border-color); margin: 20px 0; }
         
         .tab-content iframe, .tab-content blockquote { max-width: 100%; border-radius: 8px; }
@@ -325,7 +363,7 @@
         .radar-axis    { stroke: var(--chart-grid); stroke-width: 0.8; }
         .radar-label   { font-size: 11px; fill: var(--text-main); font-weight: 600; text-anchor: middle; dominant-baseline: middle; }
         .radar-value   { font-size: 7.5px; fill: var(--text-muted); text-anchor: middle; dominant-baseline: middle; }
-        .radar-polygon { fill: var(--chart-poly-fill); stroke: var(--chart-poly-stroke); stroke-width: 2; stroke-linejoin: round; }
+        .radar-polygon { fill: var(--chart-poly-fill); stroke: var(--chart-poly-stroke); stroke-width: 2; stroke-linejoin: round; filter: drop-shadow(0 0 6px var(--chart-poly-stroke)); }
         .radar-dot     { fill: var(--chart-dot); stroke: var(--card-solid); stroke-width: 1.2; }
 
         /* --- Project Cards --- */
@@ -337,7 +375,7 @@
             display: flex; flex-direction: column;
             transition: all 0.2s ease;
         }
-        .project-card:hover { transform: translateY(-2px); border-color: var(--brand-green); box-shadow: var(--shadow-glow); }
+        .project-card:hover { transform: translateY(-2px); border-color: var(--border-hover); box-shadow: 0 6px 20px var(--brand-orange-glow); }
         .project-card img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
         .project-card-body { padding: 14px; }
         .project-card-body h4 { margin: 0 0 6px 0; font-size: 15px; color: var(--text-main); }
@@ -354,7 +392,7 @@
             display: inline-block;
             transition: all 0.2s ease;
         }
-        .tool-badge:hover { border-color: var(--brand-green); color: var(--brand-green); }
+        .tool-badge:hover { border-color: var(--brand-green); color: var(--brand-green); box-shadow: 0 0 10px var(--brand-green-glow); }
 
         /* --- Forms --- */
         .contact-form { display: flex; flex-direction: column; gap: 12px; max-width: 480px; margin-top: 15px; }
@@ -369,12 +407,12 @@
             transition: all 0.2s ease;
         }
         .contact-form input:focus, .contact-form textarea:focus {
-            border-color: var(--brand-green);
-            box-shadow: 0 0 0 3px var(--brand-green-soft);
+            border-color: var(--brand-orange);
+            box-shadow: 0 0 0 3px var(--brand-orange-soft);
         }
         .contact-form textarea { resize: vertical; min-height: 100px; }
         .contact-form button {
-            background: var(--brand-gradient);
+            background: linear-gradient(135deg, var(--brand-orange) 0%, #ff6b35 100%);
             color: #fff;
             border: none;
             padding: 12px;
@@ -382,9 +420,9 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s ease;
-            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3);
+            box-shadow: 0 4px 15px var(--brand-orange-glow);
         }
-        .contact-form button:hover { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(6, 182, 212, 0.5); }
+        .contact-form button:hover { transform: translateY(-2px); filter: brightness(1.1); }
 
         /* --- Footer --- */
         .footer {
@@ -393,28 +431,33 @@
             font-size: 13px; color: var(--text-muted);
             font-weight: 500; margin-top: 20px;
         }
-        .footer i { color: #ef4444; margin: 0 3px; }
+        .footer i { color: var(--heatmap-red); margin: 0 3px; animation: heartbeat 1.5s ease-in-out infinite; }
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
 
         /* --- Modal --- */
         .modal-overlay {
             position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(6px);
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
             display: flex; justify-content: center; align-items: center;
-            z-index: 1000; opacity: 0; pointer-events: none;
+            z-index: 2000; opacity: 0; pointer-events: none;
             transition: opacity 0.3s ease;
+            padding: 16px;
         }
         .modal-overlay.show { opacity: 1; pointer-events: auto; }
         .modal-content {
             background: var(--card-solid);
-            width: 90%; max-width: 380px;
+            width: 100%; max-width: 380px;
             padding: 28px;
             border-radius: 16px;
             border: 1px solid var(--border-color);
             position: relative; text-align: center;
             transform: translateY(20px);
             transition: transform 0.3s ease;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 40px var(--brand-orange-glow);
         }
         .modal-overlay.show .modal-content { transform: translateY(0); }
         .modal-close {
@@ -424,7 +467,7 @@
             border: none; background: transparent;
             transition: color 0.2s;
         }
-        .modal-close:hover { color: var(--text-main); }
+        .modal-close:hover { color: var(--brand-orange); }
         .modal-title { font-size: 18px; font-weight: 600; margin: 0 0 20px 0; color: var(--text-main); }
         
         .social-btn {
@@ -438,66 +481,120 @@
             transition: all 0.2s ease;
         }
         .social-btn:hover {
-            background: var(--brand-green-soft);
-            border-color: var(--brand-green);
+            background: var(--brand-orange-soft);
+            border-color: var(--brand-orange);
             transform: translateY(-1px);
+            box-shadow: 0 4px 15px var(--brand-orange-glow);
         }
         
         .btn-subscribe {
             display: block; width: 100%; padding: 14px; margin-top: 20px;
-            background: var(--brand-gradient);
+            background: linear-gradient(135deg, var(--brand-orange) 0%, var(--brand-green) 100%);
             color: #fff; font-weight: 600;
             border-radius: 10px; border: none;
             cursor: pointer; font-size: 14px;
             transition: all 0.2s ease;
-            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3);
+            box-shadow: 0 4px 15px var(--brand-orange-glow);
         }
-        .btn-subscribe:hover { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(6, 182, 212, 0.5); }
+        .btn-subscribe:hover { transform: translateY(-2px); filter: brightness(1.1); }
 
-        /* --- MOBILE --- */
+        /* ============================================================
+           📱 MOBILE — Fixed bottom nav, safe area aware
+           ============================================================ */
         @media (max-width: 992px) {
-            body { padding: 16px 16px 90px 16px; }
-            .container { flex-direction: column; }
-            .sidebar { width: 100%; }
+            body {
+                padding: 16px 14px calc(80px + env(safe-area-inset-bottom, 0px)) 14px;
+            }
+            .container { flex-direction: column; gap: 16px; }
+            .sidebar { width: 100%; gap: 14px; }
             .top-row { flex-direction: column; }
-            .bottom-split { flex-direction: column; }
+            .bottom-split { flex-direction: column; gap: 16px; }
             
-            .feed-column { min-height: 85vh; } 
-            .side-column { width: 100%; }
+            .card { padding: 16px; border-radius: 12px; }
+
+            .feed-column { min-height: 60vh; } 
+            .side-column { width: 100%; min-width: 0; }
             
             .streak-card, #learning-row { display: none !important; }
 
+            /* Fixed bottom nav */
             .tabs {
                 position: fixed;
-                bottom: 0; left: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
                 width: 100%;
-                background: var(--card-solid);
+                background: rgba(10, 10, 15, 0.92);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
                 border-top: 1px solid var(--border-color);
                 border-bottom: none;
                 margin: 0;
-                padding: 10px 5px 15px 5px;
+                padding: 8px 4px calc(8px + env(safe-area-inset-bottom, 0px)) 4px;
                 display: flex;
                 justify-content: space-around;
-                z-index: 1000;
-                box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
+                align-items: center;
+                z-index: 9999;
+                box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.6);
                 border-radius: 0;
                 overflow-x: visible;
                 scrollbar-width: none;
-                backdrop-filter: blur(20px);
+                gap: 0;
+            }
+            body.light-mode .tabs {
+                background: rgba(255, 255, 255, 0.95);
+                box-shadow: 0 -4px 20px rgba(15, 23, 42, 0.1);
             }
             .tabs::-webkit-scrollbar { display: none; }
+
             .tab {
+                flex: 1;
                 flex-direction: column;
-                gap: 4px;
-                font-size: 11px;
-                padding: 4px 8px;
+                gap: 3px;
+                font-size: 10px;
+                padding: 8px 4px;
                 background: transparent !important;
                 border: none;
-                border-radius: 8px;
+                border-radius: 10px;
+                color: var(--text-muted);
+                min-width: 0;
+                transition: all 0.2s ease;
             }
-            .tab i { font-size: 18px; }
-            .tab.active { color: var(--brand-green); font-weight: 700; }
-            .tab.active i { color: var(--brand-green); }
+            .tab i { font-size: 18px; transition: transform 0.2s ease; }
+            .tab.active {
+                color: var(--brand-orange);
+                font-weight: 700;
+                background: var(--brand-orange-soft) !important;
+                box-shadow: inset 0 -2px 0 var(--brand-orange);
+            }
+            .tab.active i {
+                color: var(--brand-orange);
+                transform: scale(1.1);
+                filter: drop-shadow(0 0 6px var(--brand-orange-glow));
+            }
+            .tab span, .tab-text {
+                display: block;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 100%;
+            }
+
+            /* Modal fit */
+            .modal-content { padding: 24px 20px; }
+
+            /* Mobile typography */
+            .section-title { font-size: 11px; }
+            .profile-info h1 { font-size: 17px; }
+            .radar-wrapper { width: 180px; height: 160px; }
+        }
+
+        /* Very small screens */
+        @media (max-width: 400px) {
+            body { padding: 12px 10px calc(78px + env(safe-area-inset-bottom, 0px)) 10px; }
+            .tab { font-size: 9px; padding: 6px 2px; }
+            .tab i { font-size: 16px; }
+            .card { padding: 14px; }
         }
     </style>
 </head>
@@ -546,15 +643,15 @@
             <div class="top-row">
                 <div class="card heatmap-card">
                     <div class="section-title">GitHub Contribution Heatmap</div>
-                    <img src="https://ghchart.rshah.org/06b6d4/sumitaidev" alt="GitHub Contribution Graph" style="max-width: 100%; height: auto;" />
+                    <img src="https://ghchart.rshah.org/ff6b6b/sumitaidev" alt="GitHub Contribution Graph" style="max-width: 100%; height: auto;" />
                 </div>
                 <div class="card streak-card">
                     <div class="section-title" style="align-self: flex-start;">GitHub Streak & Stats</div>
-                    <img src="https://github-readme-streak-stats.herokuapp.com/?user=sumitaidev&theme=dark&hide_border=true&stroke=06b6d4&ring=3b82f6&fire=06b6d4&currStreakNum=f8fafc&sideNums=f8fafc&currStreakLabel=06b6d4&sideLabels=94a3b8&dates=94a3b8" alt="GitHub Streak Stats" style="max-width: 100%; height: auto;" />
+                    <img src="https://github-readme-streak-stats.herokuapp.com/?user=sumitaidev&theme=dark&hide_border=true&stroke=ff8c42&ring=22c55e&fire=ff6b6b&currStreakNum=f5f7fa&sideNums=f5f7fa&currStreakLabel=ff8c42&sideLabels=a0a8b8&dates=a0a8b8" alt="GitHub Streak Stats" style="max-width: 100%; height: auto;" />
                 </div>
             </div>
 
-            <!-- MIDDLE ROW (loaded from learning.txt) -->
+            <!-- MIDDLE ROW -->
             <div class="card" id="learning-row" style="padding: 10px;">
                 <p style="color: var(--text-muted); font-size: 13px; text-align: center;">Loading learning journey...</p>
             </div>
@@ -565,11 +662,11 @@
                 <!-- FEED COLUMN -->
                 <div class="card feed-column">
                     <div class="tabs">
-                        <div class="tab active" data-file="feed.txt" data-target="feed"><i class="fa-solid fa-rss"></i> Feed</div>
-                        <div class="tab" data-file="projects.txt" data-target="projects"><i class="fa-solid fa-diagram-project"></i> My Projects</div>
-                        <div class="tab" data-file="skills.txt" data-target="skills"><i class="fa-solid fa-code"></i> My Skills</div>
-                        <div class="tab" data-file="resume.txt" data-target="resume"><i class="fa-regular fa-file-lines"></i> Resume</div>
-                        <div class="tab" data-file="contact.txt" data-target="contact"><i class="fa-regular fa-envelope"></i> Contact Me</div>
+                        <div class="tab active" data-file="feed.txt" data-target="feed"><i class="fa-solid fa-rss"></i> <span>Feed</span></div>
+                        <div class="tab" data-file="projects.txt" data-target="projects"><i class="fa-solid fa-diagram-project"></i> <span>Projects</span></div>
+                        <div class="tab" data-file="skills.txt" data-target="skills"><i class="fa-solid fa-code"></i> <span>Skills</span></div>
+                        <div class="tab" data-file="resume.txt" data-target="resume"><i class="fa-regular fa-file-lines"></i> <span>Resume</span></div>
+                        <div class="tab" data-file="contact.txt" data-target="contact"><i class="fa-regular fa-envelope"></i> <span>Contact</span></div>
                     </div>
 
                     <div id="feed" class="tab-content active"><p style="color: var(--text-muted); font-size: 13px;">Loading feed...</p></div>
@@ -582,7 +679,7 @@
                 <!-- SIDE COLUMN -->
                 <div class="side-column">
                     <div class="card">
-                        <div class="section-title">Platforms & Tools I've Built</div>
+                        <div class="section-title">Platforms I've Built</div>
                         <div id="platforms-container" class="platform-list">
                             <p style="color: var(--text-muted); font-size: 13px;">Loading platforms...</p>
                         </div>
@@ -666,16 +763,11 @@
         // 🌙 THEME — DARK IS DEFAULT
         // ============================================================
         const themeToggleBtn = document.getElementById('theme-toggle');
-        const icon = themeToggleBtn.querySelector('i');
 
-        // Apply saved theme. If "light" was chosen before, activate .light-mode.
-        // Otherwise, dark (default) stays as-is.
         if (localStorage.getItem('theme') === 'light') {
             document.body.classList.add('light-mode');
-            icon.classList.replace('fa-sun', 'fa-moon');
             themeToggleBtn.innerHTML = '<i class="fa-solid fa-moon"></i> Toggle Dark Mode';
         } else {
-            // Ensure dark is default and update button label accordingly
             localStorage.setItem('theme', 'dark');
             themeToggleBtn.innerHTML = '<i class="fa-solid fa-sun"></i> Toggle Light Mode';
         }
@@ -779,7 +871,7 @@
         }
 
         // ============================================================
-        // 📥 FETCH .txt FILES — always fresh (cache-busted)
+        // 📥 FETCH .txt FILES
         // ============================================================
         const fileCache = {};
 
@@ -801,12 +893,8 @@
 
                 container.innerHTML = html;
 
-                if (fileName === 'learning.txt') {
-                    renderRadarChart();
-                }
-                if (targetId === 'feed' && window.twttr) {
-                    window.twttr.widgets.load(container);
-                }
+                if (fileName === 'learning.txt') renderRadarChart();
+                if (targetId === 'feed' && window.twttr) window.twttr.widgets.load(container);
             } catch (error) {
                 console.error(`Error loading ${fileName}:`, error);
                 container.innerHTML = `<p style="font-size: 13px; color: #ef4444;">Error loading ${fileName}. (${error.message})</p>`;
