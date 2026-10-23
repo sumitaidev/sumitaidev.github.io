@@ -1,9 +1,38 @@
+<!-- ============================================================
+     FEED — Image + Caption cards with dark gradient overlay
+     ============================================================ -->
 
+<div class="feed-card">
+    <img src="https://raw.githubusercontent.com/sumitaidev/sumitaidev.github.io/refs/heads/main/css/Screenshot%202026-08-09%20233620.png" alt="Feed image">
+    <div class="feed-card-caption">
+        <p>The course of discipline is that every day is the same, and the course of indiscipline every year does.</p>
+    </div>
+</div>
 
-<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="en" dir="ltr">The course of discipline is that every day is same, and the course of indiscipline every year does</p>&mdash; Sumit Haldar (@sumitaidev) <a href="https://x.com/sumitaidev/status/2098251412857851959?ref_src=twsrc%5Etfw">September 11, 2026</a></blockquote> <script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
+<div class="feed-card">
+    <img src="https://raw.githubusercontent.com/sumitaidev/sumitaidev.github.io/refs/heads/main/css/Screenshot%202026-08-09%20233620.png" alt="Feed image">
+    <div class="feed-card-caption">
+        <p>LLM apps can fail without crashing — silent errors in AI pipelines are the hardest to catch.</p>
+    </div>
+</div>
 
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">LLM apps can fail without crashing... <a href="https://t.co/8YTH50NvVe">pic.twitter.com/8YTH50NvVe</a></p>&mdash; freeCodeCamp.org (@freeCodeCamp) <a href="https://x.com/freeCodeCamp/status/2098804449217003827">September 12, 2026</a></blockquote>
+<div class="feed-card">
+    <img src="https://raw.githubusercontent.com/sumitaidev/sumitaidev.github.io/refs/heads/main/css/Screenshot%202026-08-09%20233620.png" alt="Feed image">
+    <div class="feed-card-caption">
+        <p>Building my first end-to-end RAG pipeline. Retrieval quality matters more than model size.</p>
+    </div>
+</div>
 
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Next tweet content here...</p>&mdash; Your Name (@sumitaidev) <a href="...">Date</a></blockquote>
+<div class="feed-card">
+    <img src="https://raw.githubusercontent.com/sumitaidev/sumitaidev.github.io/refs/heads/main/css/Screenshot%202026-08-09%20233620.png" alt="Feed image">
+    <div class="feed-card-caption">
+        <p>Automation isn't about replacing work — it's about removing friction so you can think bigger.</p>
+    </div>
+</div>
 
-<iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7504268688305315841?collapsed=1" height="669" width="504" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
+<div class="feed-card">
+    <img src="https://raw.githubusercontent.com/sumitaidev/sumitaidev.github.io/refs/heads/main/css/Screenshot%202026-08-09%20233620.png" alt="Feed image">
+    <div class="feed-card-caption">
+        <p>Data cleaning takes 80% of the time. The model is the easy part. Document everything.</p>
+    </div>
+</div>
