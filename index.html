@@ -457,30 +457,21 @@
             text-shadow: 0 2px 6px rgba(0, 0, 0, 0.95), 0 1px 3px rgba(0, 0, 0, 1);
         }
 
-        /* --- Resume Download Button --- */
-        .resume-download-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 24px;
-            background: linear-gradient(135deg, var(--brand-orange) 0%, #ff6b35 100%);
-            color: #fff;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 14px;
-            margin-top: 16px;
-            border: none;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 15px var(--brand-orange-glow);
-        }
-        .resume-download-btn:hover {
-            transform: translateY(-2px);
-            filter: brightness(1.1);
-            box-shadow: 0 6px 22px var(--brand-orange-glow);
-        }
+       .resume-download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, var(--brand-orange) 0%, #ff6b35 100%);
+    color: #ffffff !important; /* ✅ Forces white text */
+    /* ... */
+}
 
+/* Also ensure the icon inside stays white on hover */
+.resume-download-btn:hover {
+    color: #ffffff !important;
+    text-decoration: none !important;
+}
         /* --- Radar SVG --- */
         .radar-grid    { fill: none; stroke: var(--chart-grid); stroke-width: 0.8; stroke-dasharray: 3 3; }
         .radar-axis    { stroke: var(--chart-grid); stroke-width: 0.8; }
