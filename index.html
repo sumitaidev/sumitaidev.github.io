@@ -14,6 +14,9 @@
     
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/sumitaidev/sumitaidev.github.io/refs/heads/main/css/Screenshot%202026-08-09%20233620.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
         /* ============================================================
@@ -50,6 +53,9 @@
             --chart-poly-fill: rgba(255, 140, 66, 0.22);
             --chart-poly-stroke: #ff8c42;
             --chart-dot: #ff8c42;
+
+            /* Excalidraw font family (FONT_FAMILY from @excalidraw/excalidraw) */
+            --excalidraw-font: "Virgil", "Cascadia", "Segoe Print", "Comic Sans MS", "Caveat", cursive;
         }
 
         * { box-sizing: border-box; }
@@ -142,7 +148,7 @@
         .info-list a:hover { text-decoration: underline; }
 
         /* ============================================================
-           📰 BLOG TOGGLE — fixed hover text visibility + clear toggle icon
+           📰 BLOG TOGGLE — text + icon always visible, rotates when closed
            ============================================================ */
         .blog-toggle {
             cursor: pointer;
@@ -165,7 +171,7 @@
 
         .blog-toggle:active { transform: scale(0.99); }
 
-        /* Gradient label text — independent of container background */
+        /* Gradient label text — always visible, independent of container bg */
         .blog-toggle > span {
             background: linear-gradient(135deg, var(--brand-orange) 0%, var(--brand-green) 100%);
             -webkit-background-clip: text;
@@ -176,21 +182,34 @@
             text-transform: uppercase;
             letter-spacing: 1.2px;
             font-size: 12px;
+            flex: 1;
+            min-width: 0;
         }
 
-        /* Toggle icon — always visible, rotates when closed */
+        /* Toggle icon — solid orange, always visible, rotates when closed */
         .blog-toggle .toggle-icon {
-            transition: transform 0.3s ease;
             color: var(--brand-orange);
             font-size: 13px;
             flex-shrink: 0;
             margin-left: 8px;
+            transition: transform 0.3s ease;
+            display: inline-block;
+            -webkit-text-fill-color: var(--brand-orange);
+            background: none;
+            -webkit-background-clip: initial;
+            background-clip: initial;
+            line-height: 1;
         }
         .blog-toggle .toggle-icon.closed { transform: rotate(180deg); }
 
-        .blog-toggle.section-title {
-            margin: 0;
-            font-size: 12px;
+        /* Reset any inherited gradient from .section-title */
+        .blog-toggle.section-title { margin: 0; font-size: 12px; }
+        .blog-toggle.section-title .toggle-icon {
+            color: var(--brand-orange);
+            -webkit-text-fill-color: var(--brand-orange);
+            background: none;
+            -webkit-background-clip: initial;
+            background-clip: initial;
         }
 
         .blog-wrapper { max-height: 1500px; opacity: 1; transition: max-height 0.4s ease, opacity 0.3s ease, margin-top 0.3s ease; overflow: hidden; margin-top: 14px; }
@@ -426,12 +445,15 @@
             );
         }
 
+        /* Excalidraw hand-drawn font ONLY for image caption */
         .feed-card-caption p {
             margin: 0;
             color: #ffffff;
-            font-size: 14px;
+            font-family: var(--excalidraw-font);
+            font-size: 18px;
             font-weight: 500;
             line-height: 1.45;
+            letter-spacing: 0.2px;
             text-shadow: 0 2px 6px rgba(0, 0, 0, 0.95), 0 1px 3px rgba(0, 0, 0, 1);
         }
 
@@ -772,7 +794,7 @@
 
             /* Feed caption slightly smaller on mobile */
             .feed-card-caption { padding: 14px 14px 12px 14px; }
-            .feed-card-caption p { font-size: 13px; }
+            .feed-card-caption p { font-size: 16px; }
         }
 
         @media (max-width: 400px) {
@@ -780,7 +802,7 @@
             .tab { font-size: 9px; padding: 5px 2px; }
             .tab i { font-size: 16px; }
             .card { padding: 14px; }
-            .feed-card-caption p { font-size: 12.5px; }
+            .feed-card-caption p { font-size: 15px; }
         }
     </style>
 </head>
