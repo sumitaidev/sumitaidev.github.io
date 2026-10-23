@@ -22,60 +22,7 @@
 
     <hr>
 
-    <!-- EDUCATION -->
-    <h3><i class="fa-solid fa-graduation-cap" style="color: var(--brand-orange); margin-right: 6px;"></i> Education</h3>
-    <ul>
-        <li>
-            <b>B.Tech — Artificial Intelligence &amp; Data Science</b><br>
-            Guru Ghasidas Vishwavidyalaya, Bilaspur<br>
-            <span style="color: var(--text-dim); font-size: 12.5px;">2023 – 2027 (expected)</span>
-        </li>
-    </ul>
-
-    <hr>
-
-    <!-- SKILLS -->
-    <h3><i class="fa-solid fa-code" style="color: var(--brand-orange); margin-right: 6px;"></i> Technical Skills</h3>
-    <ul>
-        <li><b>Languages:</b> Python, JavaScript, HTML, CSS, SQL</li>
-        <li><b>AI / ML:</b> NumPy, Pandas, Scikit-learn, Matplotlib, Seaborn, basic PyTorch</li>
-        <li><b>Data:</b> Data cleaning, EDA, feature engineering, visualization</li>
-        <li><b>Web:</b> Responsive layouts, Fetch API, REST, Git &amp; GitHub Pages</li>
-        <li><b>Tools:</b> VS Code, Jupyter, Git, GitHub, Linux basics</li>
-    </ul>
-
-    <hr>
-
-    <!-- PROJECTS -->
-    <h3><i class="fa-solid fa-diagram-project" style="color: var(--brand-orange); margin-right: 6px;"></i> Selected Projects</h3>
-    <ul>
-        <li>
-            <b>Portfolio Website</b> — <span style="color: var(--text-dim); font-size: 12.5px;">HTML, CSS, JS</span><br>
-            Personal portfolio with dynamic `.txt`-based content loading, dark glassmorphism theme,
-            and responsive mobile bottom navigation.
-        </li>
-        <li>
-            <b>Automation Scripts</b> — <span style="color: var(--text-dim); font-size: 12.5px;">Python</span><br>
-            Small CLI utilities for file organization, data cleanup, and repetitive task automation.
-        </li>
-        <li>
-            <b>Data Analysis Notebooks</b> — <span style="color: var(--text-dim); font-size: 12.5px;">Pandas, Matplotlib</span><br>
-            Exploratory data analysis on public datasets, with clear visual summaries and insights.
-        </li>
-    </ul>
-
-    <hr>
-
-    <!-- EXPERIENCE / LEARNING -->
-    <h3><i class="fa-solid fa-briefcase" style="color: var(--brand-orange); margin-right: 6px;"></i> Learning &amp; Experience</h3>
-    <ul>
-        <li>Self-directed study of machine learning fundamentals and LLM application patterns.</li>
-        <li>Building small end-to-end projects to practice data cleaning → modeling → deployment.</li>
-        <li>Active on GitHub (<a href="https://github.com/sumitaidev" target="_blank">@sumitaidev</a>) with daily commit streaks.</li>
-    </ul>
-
-    <hr>
-
+    
     <!-- CONTACT -->
     <h3><i class="fa-regular fa-envelope" style="color: var(--brand-orange); margin-right: 6px;"></i> Contact</h3>
     <ul>
