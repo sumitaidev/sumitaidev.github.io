@@ -1,6 +1,6 @@
 <div class="blog-list">
-    <a href="https://prod-assets.cosmic.aws.dev/a/3KwXJjOeW4owyg9qJCqxUfq2SWd/Scre.webp" target="_blank" class="blog-item">
-        <img src="https://i.ibb.co/8LxkVk4d/image.png" alt="Thumbnail" class="blog-thumb">
+    <a href="https://builder.aws.com/content/3KwWGmehKa31Rpn8cptO179GPBn/why-amazon-q-business-needs-a-visual-ai-workflow-builder" target="_blank" class="blog-item">
+        <img src="https://prod-assets.cosmic.aws.dev/a/3KwXJjOeW4owyg9qJCqxUfq2SWd/Scre.webp" alt="Thumbnail" class="blog-thumb">
         <div class="blog-info">
             <h4>Why Amazon Q Business Needs a Visual AI Workflow Builder</h4>
             <p>Published Oct 20, 2026</p>
