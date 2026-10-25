@@ -3,35 +3,35 @@
      ============================================================ -->
 
 <div class="feed-card">
-    <img src="https://i.ibb.co/0Rtv67bg/Screenshot-2026-10-21-at-9-05-06-AM.png" alt="Feed image">
+    <img src="https://pbs.twimg.com/media/HVdFfSeakAAfvbT?format=jpg&name=medium" alt="Feed image">
     <div class="feed-card-caption">
         <p>The course of discipline is that every day is the same, and the course of indiscipline every year does.</p>
     </div>
 </div>
 
 <div class="feed-card">
-    <img src="https://raw.githubusercontent.com/sumitaidev/sumitaidev.github.io/refs/heads/main/css/Screenshot%202026-08-09%20233620.png" alt="Feed image">
+    <img src="https://pbs.twimg.com/media/HVdFiugaUAItj_m?format=jpg&name=medium" alt="Feed image">
     <div class="feed-card-caption">
         <p>LLM apps can fail without crashing — silent errors in AI pipelines are the hardest to catch.</p>
     </div>
 </div>
 
 <div class="feed-card">
-    <img src="https://raw.githubusercontent.com/sumitaidev/sumitaidev.github.io/refs/heads/main/css/Screenshot%202026-08-09%20233620.png" alt="Feed image">
+    <img src="https://pbs.twimg.com/media/HVdF85EbsAAomqI?format=jpg&name=medium" alt="Feed image">
     <div class="feed-card-caption">
         <p>Building my first end-to-end RAG pipeline. Retrieval quality matters more than model size.</p>
     </div>
 </div>
 
 <div class="feed-card">
-    <img src="https://raw.githubusercontent.com/sumitaidev/sumitaidev.github.io/refs/heads/main/css/Screenshot%202026-08-09%20233620.png" alt="Feed image">
+    <img src="https://pbs.twimg.com/media/HVdGASYboAAQkUE?format=jpg&name=900x900" alt="Feed image">
     <div class="feed-card-caption">
         <p>Automation isn't about replacing work — it's about removing friction so you can think bigger.</p>
     </div>
 </div>
 
 <div class="feed-card">
-    <img src="https://raw.githubusercontent.com/sumitaidev/sumitaidev.github.io/refs/heads/main/css/Screenshot%202026-08-09%20233620.png" alt="Feed image">
+    <img src="https://pbs.twimg.com/media/HVdGDAlbQAA-0fp?format=jpg&name=medium" alt="Feed image">
     <div class="feed-card-caption">
         <p>Data cleaning takes 80% of the time. The model is the easy part. Document everything.</p>
     </div>
