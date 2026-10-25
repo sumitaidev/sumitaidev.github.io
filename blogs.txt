@@ -1,9 +1,9 @@
 <div class="blog-list">
-    <a href="https://x.com/freeCodeCamp/status/2105931285428408519?s=20" target="_blank" class="blog-item">
+    <a href="https://prod-assets.cosmic.aws.dev/a/3KwXJjOeW4owyg9qJCqxUfq2SWd/Scre.webp" target="_blank" class="blog-item">
         <img src="https://i.ibb.co/8LxkVk4d/image.png" alt="Thumbnail" class="blog-thumb">
         <div class="blog-info">
-            <h4>How to Build an Evaluation Pipeline for AI Models</h4>
-            <p>September 12, 2026</p>
+            <h4>Why Amazon Q Business Needs a Visual AI Workflow Builder</h4>
+            <p>Published Oct 20, 2026</p>
         </div>
     </a>
 
