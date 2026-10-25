@@ -7,8 +7,8 @@
         </div>
     </a>
 
-    <a href="https://x.com/freeCodeCamp/status/2105870649516245290?s=20" target="_blank" class="blog-item">
-        <img src="https://i.ibb.co/F9XbJQy/image.png" alt="Thumbnail" class="blog-thumb">
+    <a href="https://www.linkedin.com/pulse/mcp-vs-api-whats-real-difference-sumit-haldar-yhymf" target="_blank" class="blog-item">
+        <img src="https://media.licdn.com/dms/image/v2/D4D12AQHHRoNqyHvmPg/article-cover_image-shrink_720_1280/B4DaFxzULtKcAQ-/0/1792910640104?e=1794441600&v=beta&t=8hb6bD0o76BZ1VWf_1zbU87P2R2PEh6s1-Pc1kq_tsA" alt="Thumbnail" class="blog-thumb">
         <div class="blog-info">
             <h4>Data Science Lifecycles: Using Pandas and NumPy effectively</h4>
             <p>August 28, 2026</p>
