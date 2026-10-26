@@ -1,9 +1,9 @@
 <div class="project-grid">
     <div class="project-card">
-        <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&q=80" alt="Automation Repository">
+        <img src="https://socialify.dev/sumitaidev/Daily-coding-challenge/image?custom_description=hello+eveyone+&custom_language=Jupyter+Notebook&description=1&forks=1&issues=1&language=1&name=1&owner=1&pattern=Charlie+Brown&pulls=1&stargazers=1&theme=Light" alt="Automation Repository">
         <div class="project-card-body">
-            <h4>Python Automation Suite</h4>
-            <p>A collection of automated micro-tools including a WhatsApp Auto Messenger, Blink Photo Detection, and Wikipedia search integration.</p>
+            <h4>daily coding challengee in mail</h4>
+            <p>A collection of automated  Auto Messenger, Deficulty Detection, and Wikipedia search integration.</p>
         </div>
     </div>
 
